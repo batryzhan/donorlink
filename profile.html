@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaveLink</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main class="container">
+    <div class="profile-box">
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"><i class='bx bx-camera'></i></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview"></div>
+            </div>
+        </div>
+
+        <form class="compact-form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label>First Name:</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="input-group">
+                    <label>Last Name:</label>
+                    <input type="text" id="lastName" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Age:</label>
+                    <input type="number" id="age" min="1" max="120">
+                </div>
+                <div class="input-group">
+                    <label>Gender:</label>
+                    <select id="gender">
+                        <option value="">Select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Blood Group:</label>
+                    <select id="bloodGroup">
+                        <option value="">Select</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Phone:</label>
+                    <input type="tel" id="phone" pattern="[0-9]{10}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group full-width">
+                    <label>Location:</label>
+                    <input type="text" id="location">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group full-width">
+                    <label>Medical Notes:</label>
+                    <textarea id="notes" rows="2"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="save-btn">Save Profile</button>
+        </form>
+    </div>
+</main>
+<div class="footer">
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="home.html"></a><i class='bx bxs-home-alt-2'></i><div>Home</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="help.html"></a><i class='bx bx-donate-heart'></i><div>Help</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="donations.html"></a><i class='bx bxs-droplet'></i></i><div>Donations</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="locations.html"></a><i class='bx bxs-location-plus'></i><div>Locations</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="profile.html"></a><i class='bx bx-user'></i><div>Profile</div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
