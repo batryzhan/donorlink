@@ -1,6 +1,4 @@
-
-// Scroll animation trigger
-function checkVisibility() {
+function checkVisibility()   {
     const steps = document.querySelectorAll('.step');
     const features = document.querySelectorAll('.feature-item');
 
@@ -10,7 +8,6 @@ function checkVisibility() {
             step.classList.add('visible');
         }
     });
-
     features.forEach((feature, index) => {
         feature.style.setProperty('--index', index);
         const rect = feature.getBoundingClientRect();
@@ -21,14 +18,10 @@ function checkVisibility() {
     });
 }
 
-// Initialize event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Add animation delays
     document.querySelectorAll('.feature-item').forEach((item, index) => {
         item.style.animationDelay = `${index * 0.2}s`;
     });
-
-    // Add footer click handlers
     document.querySelectorAll('.fot-item').forEach(item => {
         item.addEventListener('click', function(event) {
             event.preventDefault();
@@ -38,13 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 200);
         });
     });
-
-    // Initial check
     checkVisibility();
     window.addEventListener('scroll', checkVisibility);
 });
-
-// Active state management
 function setActive(element) {
     document.querySelectorAll('.fot-item').forEach(item => {
         item.classList.remove('active');
@@ -57,7 +46,7 @@ function editProfile() {
 
 function logout() {
     alert("You have been logged out.");
-    window.location.href = "login.html"; // Redirect to login page
+    window.location.href = "login.html";
 }
 document.addEventListener('DOMContentLoaded', function() {
     const currentPage = window.location.pathname.split('/').pop();
@@ -71,8 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-// Handle footer item clicks
 function setActive(element) {
     const link = element.querySelector('a');
     if (link) {
@@ -80,26 +67,17 @@ function setActive(element) {
     }
 }
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all location cards
     const locationCards = document.querySelectorAll('.location-card');
     const mainMap = document.getElementById('mainMap');
-
-    // Add click event listener to each card
     locationCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Remove active class from all cards
             locationCards.forEach(c => c.classList.remove('active'));
-
-            // Add active class to clicked card
             this.classList.add('active');
-
-            // Update map source
             const newMapUrl = this.getAttribute('data-map');
             mainMap.src = newMapUrl;
         });
     });
 });
-// Image Upload Preview
 function readURL(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
@@ -114,19 +92,12 @@ function readURL(input) {
 document.getElementById('imageUpload').addEventListener('change', function() {
     readURL(this);
 });
-
-// Load saved image
 window.addEventListener('load', function() {
     const savedImage = localStorage.getItem('profileImage');
     if (savedImage) {
         document.getElementById('imagePreview').style.backgroundImage = `url(${savedImage})`;
     }
 });
-
-// Update previous save/load functions to include other fields
-// (modify the previous localStorage code similarly for other fields)
-// Donation Modal Functions
-// Add to script.js
 document.querySelectorAll('.amount-option').forEach(button => {
     button.addEventListener('click', function() {
         document.querySelectorAll('.amount-option').forEach(btn => btn.classList.remove('active'));
@@ -141,7 +112,6 @@ document.querySelectorAll('.method-card').forEach(card => {
         this.classList.add('selected');
     });
 });
-// script.js
 function showForm(role) {
     document.querySelectorAll('.form-container').forEach(form => {
         form.classList.remove('visible');
@@ -151,13 +121,9 @@ function showForm(role) {
     const form = document.querySelector(`.${role}-form`);
     form.classList.remove('hidden');
     setTimeout(() => form.classList.add('visible'), 10);
-
-    // Button animation
     document.querySelectorAll('.btn').forEach(btn => btn.style.transform = 'scale(1)');
     event.target.style.transform = 'scale(1.05)';
 }
-
-// File upload handling
 function setupUpload(uploadAreaId) {
     const uploadArea = document.getElementById(uploadAreaId);
     const fileInput = uploadArea.querySelector('input[type="file"]');
@@ -186,21 +152,16 @@ function setupUpload(uploadAreaId) {
         }
     });
 }
-
-// Form visibility control
 function showForm(formType) {
     document.querySelectorAll('.form-container').forEach(form => {
         form.style.display = 'none';
     });
     document.querySelector(`.${formType}-form`).style.display = 'block';
 }
-
-// File upload handling
 function handleFileUpload(input, uploadAreaId) {
     const uploadArea = document.getElementById(uploadAreaId);
     const file = input.files[0];
     if (file) {
-        // Validate file type
         const allowedTypes = ['application/pdf', 'application/msword',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
         if (!allowedTypes.includes(file.type)) {
@@ -208,8 +169,6 @@ function handleFileUpload(input, uploadAreaId) {
             input.value = '';
             return;
         }
-
-        // Validate file size (5MB max)
         const maxSize = 5 * 1024 * 1024;
         if (file.size > maxSize) {
             alert('File size exceeds 5MB limit.');
@@ -218,13 +177,11 @@ function handleFileUpload(input, uploadAreaId) {
         }
 
         uploadArea.innerHTML = `
-                <i class="fas fa-check-circle" style="color: #27ae60;"></i>
+                <i class="bxs bx-check-circle" style="color: #27ae60;"></i>
                 <p>${file.name} (${(file.size/1024/1024).toFixed(2)}MB)</p>
             `;
     }
 }
-
-// Drag and drop functionality
 document.querySelectorAll('.upload-area').forEach(area => {
     area.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -243,8 +200,6 @@ document.querySelectorAll('.upload-area').forEach(area => {
         handleFileUpload(input, area.id);
     });
 });
-
-// Form submission handling
 function handleSubmit(event, formType) {
     event.preventDefault();
     const form = event.target;
@@ -252,24 +207,16 @@ function handleSubmit(event, formType) {
     const buttonText = submitButton.querySelector('.button-text');
     const spinner = submitButton.querySelector('.fa-spinner');
     const successMessage = form.parentElement.querySelector('.success-message');
-
-    // Show loading state
     buttonText.textContent = 'Submitting...';
     spinner.classList.remove('hidden');
     submitButton.disabled = true;
-
-    // Simulate API call
     setTimeout(() => {
         // Reset button state
         buttonText.textContent = formType === 'donor' ? 'Submit Donation' : 'Submit Request';
         spinner.classList.add('hidden');
         submitButton.disabled = false;
-
-        // Show success message
         form.style.display = 'none';
         successMessage.classList.add('show');
-
-        // Reset form and upload area
         form.reset();
         const uploadArea = form.querySelector('.upload-area');
         uploadArea.innerHTML = `
@@ -278,8 +225,6 @@ function handleSubmit(event, formType) {
             `;
     }, 2000);
 }
-
-// Input validation
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('blur', () => {
         if (!input.checkValidity()) {
@@ -293,10 +238,43 @@ document.getElementById("donationForm").addEventListener("submit", function(even
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-
-    // Add your form submission logic here
     console.log('Form submitted:', data);
 
     alert("Thank you for your willingness to donate! We will contact you soon.");
     event.target.reset();
 });
+const linkItems = document.querySelectorAll(".link-item");
+linkItems.forEach((linkItem, index) => {
+    linkItem.addEventListener("click", () => {
+        document.querySelector(".active").classList.remove("active");
+        linkItem.classList.add("active");
+        const indicator = document.querySelector(".indicator");
+        indicator.style.left = `${index * 95 + 48}px`;
+    })
+});
+
+// Smooth page transitions
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Skip external links and anchor links
+        if (this.hostname !== window.location.hostname || this.hash) return;
+
+        e.preventDefault();
+        const href = this.href;
+
+        // Trigger exit animation
+        const container = document.querySelector('.container');
+        if (container) {
+            container.classList.add('page-exit');
+        }
+
+        // Navigate after animation completes
+        setTimeout(() => {
+            window.location.href = href;
+        }, 500);
+    });
+});
+
+
+
+
