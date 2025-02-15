@@ -2,87 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Help Center - SaveLink</title>
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>DonorLink - Payment Gateway</title>
+    <link rel="stylesheet" href="help.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 <div class="container">
-    <section class="help-section">
-        <h1>Need Help? We’re Here for You</h1>
-        <p class="subtitle">At SaveLink, we understand that finding a donor can be stressful. This guide will help you navigate our platform and get the support you need.</p>
+    <form action="">
+        <div class="row">
+            <div class="column">
+                <h3 class="title">Billing Address</h3>
+                <div class="input-box">
+                    <span>Full Name :</span>
+                    <input type="text" placeholder="Amanbek Batyrzhan">
+                </div>
+                <div class="input-box">
+                    <span>Email :</span>
+                    <input type="email" placeholder="youremail@example.com">
+                </div>
+                <div class="input-box">
+                    <span>Address :</span>
+                    <input type="text" placeholder="Sultan Beibarys 10">
+                </div>
+                <div class="input-box">
+                    <span>City :</span>
+                    <input type="text" placeholder="Kyzylorda">
+                </div>
 
-        <div class="help-cards">
-            <div class="help-card request-help">
-                <h2><i class='bx bx-plus-medical'></i> How to Request Help</h2>
-                <ol>
-                    <li>Sign up or log in to your account</li>
-                    <li>Click on "Request Donation" and enter details</li>
-                    <li>Our system will match you with donors nearby</li>
-                    <li>Contact donors securely through the platform</li>
-                </ol>
-                <a href="donations.html"><button class="cta-button">Start Request</button></a>
+                <div class="flex">
+                    <div class="input-box">
+                        <span>State :</span>
+                        <input type="text" placeholder="Kazakhstan">
+                    </div>
+                    <div class="input-box">
+                        <span>Zip Code :</span>
+                        <input type="number" placeholder="123 456">
+                    </div>
+                </div>
             </div>
 
-            <div class="help-card become-donor">
-                <h2><i class='bx bxs-heart'></i> How to Become a Donor</h2>
-                <ol>
-                    <li>Register as a donor with health details</li>
-                    <li>Choose group of blood</li>
-                    <li>Get notified when someone needs help</li>
-                    <li>Coordinate with the recipient</li>
-                </ol>
-                <a href="donations.html"><button class="cta-button">Register Now</button></a>
+            <div class="column">
+                <h3 class="title">Payment</h3>
+                <div class="input-box">
+                    <span>Cards Accepted :</span>
+                    <img src="photos/cards.png" alt="">
+                </div>
+                <div class="input-box">
+                    <span>Name On Card :</span>
+                    <input type="text" placeholder="Amanbek Batyrzhan">
+                </div>
+                <div class="input-box">
+                    <span>Credit Card Number :</span>
+                    <input type="number" placeholder="1111 2222 3333 4444">
+                </div>
+                <div class="input-box">
+                    <span>Exp. Month :</span>
+                    <input type="text" placeholder="March">
+                </div>
+
+                <div class="flex">
+                    <div class="input-box">
+                        <span>Exp. Year :</span>
+                        <input type="number" placeholder="2025">
+                    </div>
+                    <div class="input-box">
+                        <span>CVV :</span>
+                        <input type="number" placeholder="123">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <p class="question">Is my data safe?</p>
-                <p class="answer">Yes! We prioritize security and never share your data without consent.</p>
-            </div>
-            <div class="faq-item">
-                <p class="question">❓ Can I choose who I donate to?</p>
-                <p class="answer">✔ Yes, you have complete control over your donations.</p>
-            </div>
-            <div class="faq-item">
-                <p class="question">❓ Is SaveLink free?</p>
-                <p class="answer">✔ Absolutely! Our goal is to connect people without any cost.</p>
-            </div>
-        </div>
-
-        <div class="contact-section">
-            <h3>Still Have Questions?</h3>
-            <p>Contact our support team:</p>
-            <a href="mailto:support@savelink.com" class="contact-link">
-            </a>
-            <a href="profile.html"><button class="cta-button">Register Now</button></a>
-        </div>
-    </section>
+        <button type="submit" class="btn">Submit</button>
+    </form>
 </div>
 
+<!-- Footer -->
 <div class="footer">
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="home.html"></a><i class='bx bxs-home-alt-2'></i><div>Home</div>
+    <div class="fot-item active" onclick="setActive(this)">
+        <a href="home.html"><i class='bx bxs-home-alt-2'></i><div>Home</div></a>
     </div>
     <div class="fot-item" onclick="setActive(this)">
-        <a href="help.html"></a><i class='bx bx-donate-heart'></i><div>Help</div>
+        <a href="help.html"><i class='bx bx-donate-heart'></i><div>Help</div></a>
     </div>
     <div class="fot-item" onclick="setActive(this)">
-        <a href="donations.html"></a><i class='bx bxs-droplet'></i></i><div>Donations</div>
+        <a href="donations.html"><i class='bx bxs-droplet'></i><div>Donations</div></a>
     </div>
     <div class="fot-item" onclick="setActive(this)">
-        <a href="locations.html"></a><i class='bx bxs-location-plus'></i><div>Locations</div>
+        <a href="locations.html"><i class='bx bxs-location-plus'></i><div>Locations</div></a>
     </div>
     <div class="fot-item" onclick="setActive(this)">
-        <a href="profile.html"></a><i class='bx bx-user'></i><div>Profile</div>
+        <a href="profile.html"><i class='bx bx-user'></i><div>Profile</div></a>
     </div>
 </div>
-
 
 <script src="script.js"></script>
-
 </body>
 </html>
