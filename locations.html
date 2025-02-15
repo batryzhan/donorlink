@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaveLink - Blood Donation Locations</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="container locations-main">
+
+    <div class="content-wrapper">
+        <div class="locations-sidebar">
+            <div class="locations-list" id="locationsList">
+                <!-- Location Cards -->
+                <div class="location-card active"
+                     data-map="https://maps.google.com/maps?q=INVITRO&z=15&output=embed">
+                    <h4>INVITRO Central</h4>
+                    <p><i class='bx bx-map'></i> Baitursynov street 46B</p>
+                    <p><i class='bx bx-time'></i> Mon-Sat: 8AM - 4PM</p>
+                    <p><i class='bx bx-phone'></i> +7 (707) 258 58 88</p>
+                </div>
+                <div class="location-card"
+                     data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2828.5187122385555!2d65.49923157636373!3d44.851733971070566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41f7fd2a64be8d8b%3A0xe296ed516532e502!2z0JrQlNCbINCe0JvQmNCc0J8sINCa0LvQuNC90LjQutC-LdC00LjQsNCz0L3QvtGB0YLQuNGH0LXRgdC60LDRjyDQu9Cw0LHQvtGA0LDRgtC-0YDQuNGP!5e0!3m2!1sru!2skz!4v1739018280863!5m2!1sru!2skz">
+                    <h4>KDL OLIMP, Clinical Diagnostic Laboratory</h4>
+                    <p><i class='bx bx-map'></i> Begim Ana 16 Street</p>
+                    <p><i class='bx bx-time'></i> Mon-Fri: 8AM - 4PM</p>
+                    <p><i class='bx bx-phone'></i> +7 (7242) 59 79 69</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-frame">
+            <iframe id="mainMap"
+                    src="https://maps.google.com/maps?q=INVITRO&z=15&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</main>
+<div class="footer">
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="home.html"></a><i class='bx bxs-home-alt-2'></i><div>Home</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="help.html"></a><i class='bx bx-donate-heart'></i><div>Help</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="donations.html"></a><i class='bx bxs-droplet'></i></i><div>Donations</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="locations.html"></a><i class='bx bxs-location-plus'></i><div>Locations</div>
+    </div>
+    <div class="fot-item" onclick="setActive(this)">
+        <a href="profile.html"></a><i class='bx bx-user'></i><div>Profile</div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
