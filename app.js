@@ -10,17 +10,11 @@ document.addEventListener('DOMContentLoaded', function () {
     sign_in_btn.addEventListener("click", () => {
         container.classList.remove("sign-up-mode");
     });
-
-    // Handle form submissions with animation
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-
-            // Get form inputs
             const emailInput = form.querySelector('input[type="email"], input[placeholder="Email"]');
             const passwordInput = form.querySelector('input[type="password"]');
-
-            // Validation
             if (!emailInput.value.includes('@')) {
                 alert('Please enter a valid email address!');
                 return;
@@ -30,11 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Password must be at least 8 characters!');
                 return;
             }
-
-            // Add exit animation
             document.body.classList.add('page-exit');
-
-            // Redirect after animation
             setTimeout(() => {
                 window.location.href = 'home.html';
             }, 500);
