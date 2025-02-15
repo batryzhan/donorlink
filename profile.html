@@ -3,108 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaveLink</title>
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Donor Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-
-<main class="container">
-    <div class="profile-box">
-        <div class="avatar-upload">
-            <div class="avatar-edit">
-                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
-                <label for="imageUpload"><i class='bx bx-camera'></i></label>
-            </div>
-            <div class="avatar-preview">
-                <div id="imagePreview"></div>
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="avatar-section">
+            <div class="avatar-wrapper">
+                <div class="camera-btn" onclick="document.getElementById('avatarInput').click()">
+                    <i class="fas fa-camera text-white"></i>
+                </div>
             </div>
         </div>
 
-        <form class="compact-form">
-            <div class="form-row">
-                <div class="input-group">
-                    <label>First Name:</label>
-                    <input type="text" id="firstName" required>
-                </div>
-                <div class="input-group">
-                    <label>Last Name:</label>
-                    <input type="text" id="lastName" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="input-group">
-                    <label>Age:</label>
-                    <input type="number" id="age" min="1" max="120">
-                </div>
-                <div class="input-group">
-                    <label>Gender:</label>
-                    <select id="gender">
-                        <option value="">Select</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="input-group">
-                    <label>Blood Group:</label>
-                    <select id="bloodGroup">
-                        <option value="">Select</option>
-                        <option>A+</option>
-                        <option>A-</option>
-                        <option>B+</option>
-                        <option>B-</option>
-                        <option>AB+</option>
-                        <option>AB-</option>
-                        <option>O+</option>
-                        <option>O-</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Phone:</label>
-                    <input type="tel" id="phone" pattern="[0-9]{10}">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="input-group full-width">
-                    <label>Location:</label>
-                    <input type="text" id="location">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="input-group full-width">
-                    <label>Medical Notes:</label>
-                    <textarea id="notes" rows="2"></textarea>
-                </div>
-            </div>
-
-            <button type="submit" class="save-btn">Save Profile</button>
-        </form>
+        <div class="status-card">
+            <span class="status-circle"></span>
+            <h2>Green Light</h2>
+            <p>It means that person can be donor even today</p>
+        </div>
     </div>
-</main>
-<div class="footer">
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="home.html"></a><i class='bx bxs-home-alt-2'></i><div>Home</div>
+
+    <div class="profile-info">
+        <div class="name-section">
+            <h1>Name Surname</h1>
+            <button class="edit-btn" onclick="editName()">
+                <i class="fas fa-pencil-alt fa-lg"></i>
+            </button>
+        </div>
+
+        <ul class="details-list">
+            <li class="detail-item">
+                <span class="detail-label">Blood Type:</span>
+                <span class="detail-value" id="bloodType"></span>
+                <button class="edit-btn" onclick="editBloodType()">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+            </li>
+            <li class="detail-item">
+                <span class="detail-label">Last Donation Date:</span>
+                <span class="detail-value" id="lastDonation"></span>
+                <button class="edit-btn" onclick="editDonationDate()">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+            </li>
+            <li class="detail-item">
+                <span class="detail-label">Birthdate:</span>
+                <span class="detail-value" id="birthdate"></span>
+                <button class="edit-btn" onclick="editBirthdate()">
+                    <i class="fas fa-pencil-alt"></i>
+                </button>
+            </li>
+            <li class="detail-item">
+                <span class="detail-label">Donated:</span>
+                <span class="detail-value"></span>
+            </li>
+        </ul>
     </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="help.html"></a><i class='bx bx-donate-heart'></i><div>Help</div>
-    </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="donations.html"></a><i class='bx bxs-droplet'></i></i><div>Donations</div>
-    </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="locations.html"></a><i class='bx bxs-location-plus'></i><div>Locations</div>
-    </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="profile.html"></a><i class='bx bx-user'></i><div>Profile</div>
+
+    <div class="footer">
+        <div class="fot-item" onclick="setActive(this)">
+            <a href="home.html"><i class='bx bxs-home-alt-2'></i><div>Home</div></a>
+        </div>
+        <div class="fot-item" onclick="setActive(this)">
+            <a href="help.html"><i class='bx bx-donate-heart'></i><div>Help</div></a>
+        </div>
+        <div class="fot-item" onclick="setActive(this)">
+            <a href="donations.html"><i class='bx bxs-droplet'></i><div>Donations</div></a>
+        </div>
+        <div class="fot-item" onclick="setActive(this)">
+            <a href="locations.html"><i class='bx bxs-location-plus'></i><div>Locations</div></a>
+        </div>
+        <div class="fot-item active" onclick="setActive(this)">
+            <a href="profile.html"><i class='bx bx-user'></i><div>Profile</div></a>
+        </div>
     </div>
 </div>
-<script src="script.js"></script>
+<div class="edit-modal" id="editModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle">Edit Field</h3>
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <input type="text" class="modal-input" id="modalInput">
+            <select class="modal-input" id="modalSelect" style="display: none;">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+            <button class="modal-btn save" onclick="saveChanges()">Save</button>
+        </div>
+    </div>
+</div>
+<input type="file" id="avatarInput" style="display: none;" onchange="updateAvatar(event)">
+<script src="profile.js"></script>
 </body>
 </html>
