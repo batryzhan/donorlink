@@ -3,21 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaveLink - Connecting Lives, Saving Futures</title>
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>DonorLink - Blood Donation Platform</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Reset and Base Styles */
+        :root {
+            --primary-color: #C44D3A;
+            --secondary-color: #FF6B6B;
+            --accent-color: #4ECDC4;
+            --dark-color: #2D3047;
+            --light-color: #FDFFFC;
+            --gradient: linear-gradient(135deg, #C44D3A 0%, #FF6B6B 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        .hero {
+            position: relative;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            clip-path: ellipse(100% 60% at 50% 35%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            color: var(--light-color);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 0.8s 0.4s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Carousel Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: rgba(196, 77, 58, 0.05);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 20px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .donor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px -20px rgba(0,0,0,0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donor-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .donor-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .donor-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: #ddd;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .donor-photo:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .donor-quote {
+            font-style: italic;
+            color: var(--dark-color);
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .donor-quote::before {
+            content: '“';
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-size: 3rem;
+            color: var(--accent-color);
+            opacity: 0.3;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 0 2rem;
+        }
+
+        .feature-item {
+            position: relative;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(196, 77, 58, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .feature-item:hover::before {
+            animation: shine 1.5s ease;
+        }
+
+        /* Steps Section Enhancements */
+        .steps {
+            position: relative;
+            padding: 6rem 0;
+            background: var(--dark-color);
+            color: white;
+            clip-path: ellipse(120% 100% at 50% 0%);
+        }
+
+        .step-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+            padding: 0 2rem;
+        }
+
+        .step {
+            position: relative;
+            padding: 3rem 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.4s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes scalePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                clip-path: ellipse(200% 100% at 50% 0%);
+            }
+        }
+
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgb(255, 255, 255);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fot-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 16px;
+            transform: scale(0.95);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .fot-item a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .fot-item.active {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+            transform: scale(1);
+        }
+
+        .fot-item i {
+            font-size: 1.6rem;
+            transition: transform 0.3s ease;
+        }
+
+        .fot-item div {
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .fot-item:hover {
+            color: #ff6b6b;
+            transform: scale(1);
+        }
+
+        .fot-item:hover i {
+            transform: translateY(-2px);
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
+        .fot-item.active i {
+            animation: bounce 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .features {
+            padding: 4rem 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            animation: scalePulse 2s infinite;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+            perspective: 1000px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px) rotateX(10deg) rotateY(-5deg);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            color: #C44D3A;
+            margin-bottom: 1.5rem;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-item:hover i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .steps {
+            padding: 4rem 0;
+        }
+
+        .steps h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #C44D3A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: -50px auto 2rem;
+            box-shadow: 0 10px 20px rgba(196, 77, 58, 0.3);
+        }
+
+        .cta-button {
+            background: #C44D3A;
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(196, 77, 58, 0.3);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(196, 77, 58, 0.4);
+        }
+        .container {
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        /* Carousel Fixes */
+        .carousel-container {
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            padding: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--light-color);
+            transform: scale(1.2);
+        }
+
+        /* Feature Item Animation Fix */
+        .feature-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .feature-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
+<header class="hero">
+    <div class="hero-content">
+        <h1>People That Need Blood</h1>
+        <p class="lead">Connecting donors with those in urgent need across our community</p>
+    </div>
+</header>
+
+<section class="testimonials">
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <!-- Carousel Slides -->
+            <div class="carousel-slide active">
+                <div class="donor-card">
+                    <div class="donor-photo" style="background: #a8d5e5;"></div>
+                    <h3>Amanbek Batyrzhan</h3>
+                    <div class="donor-quote">Any Help is important but I have better choice</div>
+                    <div class="donor-icons">
+                        <i class='bx bx-donate-heart'></i>
+                        <i class='bx bx-plus-medical'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-slide active">
+                <div class="donor-card">
+                    <div class="donor-photo" style="background: #a8d5e5;"></div>
+                    <h3>Alisher Rashit</h3>
+                    <div class="donor-quote">Any Help is important but I have better choice</div>
+                    <div class="donor-icons">
+                        <i class='bx bx-donate-heart'></i>
+                        <i class='bx bx-plus-medical'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-slide active">
+                <div class="donor-card">
+                    <div class="donor-photo" style="background: #a8d5e5;"></div>
+                    <h3>Baizhigit Mukhamedia</h3>
+                    <div class="donor-quote">Any Help is important but I have better choice</div>
+                    <div class="donor-icons">
+                        <i class='bx bx-donate-heart'></i>
+                        <i class='bx bx-plus-medical'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-nav"></div>
+    </div>
+</section>
+
 <main class="container">
-    <section class="hero">
-        <h1>SaveLink – Connecting Lives, Saving Futures</h1>
-        <p class="tagline">Your Help Can Save a Life</p>
-        <p class="description">Every second counts when someone needs a blood or organ donation. SaveLink connects people in need with willing donors, making the process faster and more efficient.</p>
-        <a href="help.html"><button class="cta-button">Get Started</button></a>
-    </section>
 
     <section class="features">
-        <h2>Why SaveLink?</h2>
+        <h2>Why DonorLink?</h2>
         <div class="feature-grid">
             <div class="feature-item">
                 <i class='bx bx-check-shield'></i>
@@ -64,26 +632,369 @@
     </section>
 </main>
 
+<div class="carousel-nav"></div>
+
+<!-- Updated Footer Links -->
 <div class="footer">
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="home.html"></a><i class='bx bxs-home-alt-2'></i><div>Home</div>
+    <div class="fot-item">
+        <a href="home.html"><i class='bx bxs-home-alt-2'></i><div>Home</div></a>
     </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="help.html"></a><i class='bx bx-donate-heart'></i><div>Help</div>
+    <div class="fot-item">
+        <a href="help.html"><i class='bx bx-donate-heart'></i><div>Help</div></a>
     </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="donations.html"></a><i class='bx bxs-droplet'></i></i><div>Donations</div>
+    <div class="fot-item">
+        <a href="donations.html"><i class='bx bxs-droplet'></i><div>Donations</div></a>
     </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="locations.html"></a><i class='bx bxs-location-plus'></i><div>Locations</div>
+    <div class="fot-item">
+        <a href="locations.html"><i class='bx bxs-location-plus'></i><div>Locations</div></a>
     </div>
-    <div class="fot-item" onclick="setActive(this)">
-        <a href="profile.html"></a><i class='bx bx-user'></i><div>Profile</div>
+    <div class="fot-item">
+        <a href="profile.html"><i class='bx bx-user'></i><div>Profile</div></a>
     </div>
 </div>
 
+<script>
+    // Carousel Functionality
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const navDots = document.querySelector('.carousel-nav');
+    let currentSlide = 0;
 
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.classList.add('nav-dot');
+        dot.addEventListener('click', () => goToSlide(index));
+        navDots.appendChild(dot);
+    });
 
-<script src="script.js"></script>
+    const dots = document.querySelectorAll('.nav-dot');
+    dots[0].classList.add('active');
+
+    function goToSlide(index) {
+        currentSlide = index;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        goToSlide(currentSlide);
+    }, 5000);
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.step, .feature-item').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Footer Active State
+    function setActive(event) {
+        document.querySelectorAll('.fot-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        event.currentTarget.classList.add('active');
+    }
+
+    // Set initial active state for footer
+    document.querySelectorAll('.fot-item').forEach(item => {
+        item.addEventListener('click', setActive);
+    });
+    function checkVisibility()   {
+        const steps = document.querySelectorAll('.step');
+        const features = document.querySelectorAll('.feature-item');
+
+        steps.forEach((step, index) => {
+            const rect = step.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                step.classList.add('visible');
+            }
+        });
+        features.forEach((feature, index) => {
+            feature.style.setProperty('--index', index);
+            const rect = feature.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.8) {
+                feature.style.opacity = 1;
+                feature.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.feature-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+        });
+        document.querySelectorAll('.fot-item').forEach(item => {
+            item.addEventListener('click', function(event) {
+                event.preventDefault();
+                setActive(this);
+                setTimeout(() => {
+                    window.location.href = this.href;
+                }, 200);
+            });
+        });
+        checkVisibility();
+        window.addEventListener('scroll', checkVisibility);
+    });
+    function setActive(element) {
+        document.querySelectorAll('.fot-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        element.classList.add('active');
+    }
+    function editProfile() {
+        alert("Edit Profile feature coming soon!");
+    }
+
+    function logout() {
+        alert("You have been logged out.");
+        window.location.href = "login.html";
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop();
+
+        document.querySelectorAll('.fot-item').forEach(item => {
+            const link = item.querySelector('a');
+            if (link && link.getAttribute('href') === currentPage) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    });
+    function setActive(element) {
+        const link = element.querySelector('a');
+        if (link) {
+            window.location.href = link.getAttribute('href');
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const locationCards = document.querySelectorAll('.location-card');
+        const mainMap = document.getElementById('mainMap');
+        locationCards.forEach(card => {
+            card.addEventListener('click', function() {
+                locationCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const newMapUrl = this.getAttribute('data-map');
+                mainMap.src = newMapUrl;
+            });
+        });
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').style.backgroundImage = `url(${e.target.result})`;
+                localStorage.setItem('profileImage', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.getElementById('imageUpload').addEventListener('change', function() {
+        readURL(this);
+    });
+    window.addEventListener('load', function() {
+        const savedImage = localStorage.getItem('profileImage');
+        if (savedImage) {
+            document.getElementById('imagePreview').style.backgroundImage = `url(${savedImage})`;
+        }
+    });
+    document.querySelectorAll('.amount-option').forEach(button => {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.amount-option').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('amount').value = this.textContent.replace('$', '');
+        });
+    });
+
+    document.querySelectorAll('.method-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.method-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+    function showForm(role) {
+        document.querySelectorAll('.form-container').forEach(form => {
+            form.classList.remove('visible');
+            form.classList.add('hidden');
+        });
+
+        const form = document.querySelector(`.${role}-form`);
+        form.classList.remove('hidden');
+        setTimeout(() => form.classList.add('visible'), 10);
+        document.querySelectorAll('.btn').forEach(btn => btn.style.transform = 'scale(1)');
+        event.target.style.transform = 'scale(1.05)';
+    }
+    function setupUpload(uploadAreaId) {
+        const uploadArea = document.getElementById(uploadAreaId);
+        const fileInput = uploadArea.querySelector('input[type="file"]');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ff6b6b';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#ddd';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ddd';
+            fileInput.files = e.dataTransfer.files;
+            handleFile(fileInput.files[0]);
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                handleFile(fileInput.files[0]);
+            }
+        });
+    }
+    function showForm(formType) {
+        document.querySelectorAll('.form-container').forEach(form => {
+            form.style.display = 'none';
+        });
+        document.querySelector(`.${formType}-form`).style.display = 'block';
+    }
+    function handleFileUpload(input, uploadAreaId) {
+        const uploadArea = document.getElementById(uploadAreaId);
+        const file = input.files[0];
+        if (file) {
+            const allowedTypes = ['application/pdf', 'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please upload only PDF or Word documents.');
+                input.value = '';
+                return;
+            }
+            const maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert('File size exceeds 5MB limit.');
+                input.value = '';
+                return;
+            }
+
+            uploadArea.innerHTML = `
+                <i class="bxs bx-check-circle" style="color: #27ae60;"></i>
+                <p>${file.name} (${(file.size/1024/1024).toFixed(2)}MB)</p>
+            `;
+        }
+    }
+    document.querySelectorAll('.upload-area').forEach(area => {
+        area.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            area.classList.add('dragover');
+        });
+
+        area.addEventListener('dragleave', () => {
+            area.classList.remove('dragover');
+        });
+
+        area.addEventListener('drop', (e) => {
+            e.preventDefault();
+            area.classList.remove('dragover');
+            const input = area.querySelector('input[type="file"]');
+            input.files = e.dataTransfer.files;
+            handleFileUpload(input, area.id);
+        });
+    });
+    function handleSubmit(event, formType) {
+        event.preventDefault();
+        const form = event.target;
+        const submitButton = form.querySelector('.submit-btn');
+        const buttonText = submitButton.querySelector('.button-text');
+        const spinner = submitButton.querySelector('.fa-spinner');
+        const successMessage = form.parentElement.querySelector('.success-message');
+        buttonText.textContent = 'Submitting...';
+        spinner.classList.remove('hidden');
+        submitButton.disabled = true;
+        setTimeout(() => {
+            // Reset button state
+            buttonText.textContent = formType === 'donor' ? 'Submit Donation' : 'Submit Request';
+            spinner.classList.add('hidden');
+            submitButton.disabled = false;
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+            form.reset();
+            const uploadArea = form.querySelector('.upload-area');
+            uploadArea.innerHTML = `
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & Drop or Click to Upload Documents (PDF/DOC, max 5MB)</p>
+            `;
+        }, 2000);
+    }
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('blur', () => {
+            if (!input.checkValidity()) {
+                input.classList.add('invalid');
+            } else {
+                input.classList.remove('invalid');
+            }
+        });
+    });
+    document.getElementById("donationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+        console.log('Form submitted:', data);
+
+        alert("Thank you for your willingness to donate! We will contact you soon.");
+        event.target.reset();
+    });
+    const linkItems = document.querySelectorAll(".link-item");
+    linkItems.forEach((linkItem, index) => {
+        linkItem.addEventListener("click", () => {
+            document.querySelector(".active").classList.remove("active");
+            linkItem.classList.add("active");
+            const indicator = document.querySelector(".indicator");
+            indicator.style.left = `${index * 95 + 48}px`;
+        })
+    });
+
+    // Smooth page transitions
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Skip external links and anchor links
+            if (this.hostname !== window.location.hostname || this.hash) return;
+
+            e.preventDefault();
+            const href = this.href;
+
+            // Trigger exit animation
+            const container = document.querySelector('.container');
+            if (container) {
+                container.classList.add('page-exit');
+            }
+
+            // Navigate after animation completes
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500);
+        });
+    });
+</script>
 </body>
 </html>
+<!-- R -->
+<!-- A -->
+<!-- S -->
+<!-- H -->
+<!-- I -->
+<!-- T -->
+<!-- CH -->
+<!-- O -->
+<!-- R -->
+<!-- T -->
