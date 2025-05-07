@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonorLink - Blood Donation</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --secondary: #3498db;
+            --accent: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Header Styles */
+        .donation-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            margin-bottom: 3rem;
+            clip-path: ellipse(100% 60% at 50% 35%);
+        }
+
+        .donation-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .donation-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: var(--white);
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            margin-bottom: 2rem;
+        }
+
+        .calendar-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 10px;
+        }
+
+        /* Calendar Styles */
+        .calendar-wrapper {
+            width: 100%;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px 10px;
+            justify-content: space-between;
+        }
+
+        .calendar-header .icons {
+            display: flex;
+        }
+
+        .calendar-header .icons span {
+            height: 38px;
+            width: 38px;
+            margin: 0 1px;
+            cursor: pointer;
+            color: var(--primary);
+            text-align: center;
+            line-height: 38px;
+            font-size: 1.5rem;
+            user-select: none;
+            border-radius: 50%;
+        }
+
+        .calendar-header .icons span:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .calendar-header .current-date {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .calendar {
+            padding: 15px;
+        }
+
+        .calendar ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            text-align: center;
+        }
+
+        .calendar .weeks {
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .calendar li {
+            color: var(--dark);
+            width: calc(100% / 7);
+            font-size: 1rem;
+        }
+
+        .calendar .days li {
+            z-index: 1;
+            cursor: pointer;
+            position: relative;
+            margin-top: 25px;
+        }
+
+        .days li.inactive {
+            color: #aaa;
+        }
+
+        .days li.active {
+            color: var(--white);
+        }
+
+        .days li::before {
+            position: absolute;
+            content: "";
+            left: 50%;
+            top: 50%;
+            height: 40px;
+            width: 40px;
+            z-index: -1;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .days li.active::before {
+            background: var(--primary);
+        }
+
+        .days li:not(.active):hover::before {
+            background: #f2f2f2;
+        }
+
+        /* Donation Test Section */
+        .test-section {
+            margin-bottom: 2rem;
+        }
+
+        .test-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .test-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .test-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Contraindications Section */
+        .contraindications {
+            display: none;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contraindications.show {
+            display: block;
+        }
+
+        /* Form Section */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Info Section */
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-content {
+            margin-bottom: 1rem;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .info-content ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .info-content ul li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        .info-content ul li::before {
+            content: '\f111';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: var(--primary);
+            font-size: 8px;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .calendar li {
+                font-size: 0.9rem;
+            }
+
+            .days li::before {
+                height: 35px;
+                width: 35px;
+            }
+
+            .donation-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .donation-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .calendar-header .current-date {
+                font-size: 1rem;
+            }
+
+            .calendar li {
+                font-size: 0.8rem;
+            }
+
+            .days li::before {
+                height: 30px;
+                width: 30px;
+            }
+
+            .footer-nav {
+                padding: 8px 0;
+            }
+
+            .nav-item {
+                padding: 6px 10px;
+            }
+
+            .nav-item i {
+                font-size: 1.3rem;
+            }
+
+            .nav-item span {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Test Modal Styles */
+        .test-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .test-content {
+            background: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .test-question {
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .test-question.active {
+            display: block;
+        }
+
+        .test-question h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .test-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .test-option {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .test-option:hover {
+            background: #f5f5f5;
+        }
+
+        .test-option.selected {
+            border-color: var(--primary);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .test-progress {
+            height: 6px;
+            background: #eee;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .test-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .test-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .test-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .test-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .test-prev {
+            background: transparent;
+            border: 1px solid var(--gray);
+            color: var(--dark);
+        }
+
+        .test-next {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .test-result {
+            display: none;
+            text-align: center;
+        }
+
+        .test-result-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .test-result-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .test-result-message {
+            margin-bottom: 1.5rem;
+        }
+
+        .test-restart {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .test-restart:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        .preloader-text {
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Custom Alert Notification */
+        .alert {
+            background: #ffdb9b;
+            padding: 15px 30px;
+            min-width: 350px;
+            position: fixed;
+            right: 0;
+            top: 10px;
+            border-radius: 4px;
+            border-left: 6px solid #ffa502;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        .alert.showAlert {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .alert.show {
+            animation: show_slide 0.8s ease forwards;
+        }
+
+        @keyframes show_slide {
+            0% { transform: translateX(100%); }
+            40% { transform: translateX(-5%); }
+            80% { transform: translateX(0%); }
+            100% { transform: translateX(-5px); }
+        }
+
+        .alert.hide {
+            animation: hide_slide 0.8s ease forwards;
+        }
+
+        @keyframes hide_slide {
+            0% { transform: translateX(-5px); }
+            40% { transform: translateX(0%); }
+            80% { transform: translateX(-5%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .alert .fa-exclamation-circle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ce8500;
+            font-size: 24px;
+        }
+
+        .alert .msg {
+            padding: 0 15px 0 35px;
+            font-size: 16px;
+            color: #ce8500;
+        }
+
+        .alert .close-btn {
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffd080;
+            padding: 15px 15px;
+            cursor: pointer;
+        }
+
+        .alert .close-btn:hover {
+            background: #ffc766;
+        }
+
+        .alert .close-btn .fas {
+            color: #ce8500;
+            font-size: 18px;
+            line-height: 40px;
+        }
+
+        /* Success Alert Variant */
+        .alert.success {
+            background: #a8f0c1;
+            border-left: 6px solid #4CAF50;
+        }
+
+        .alert.success .fa-exclamation-circle,
+        .alert.success .msg,
+        .alert.success .close-btn .fas {
+            color: #4CAF50;
+        }
+
+        .alert.success .close-btn {
+            background: #96e6a1;
+        }
+
+        /* Error Alert Variant */
+        .alert.error {
+            background: #ffb3b3;
+            border-left: 6px solid #f44336;
+        }
+
+        .alert.error .fa-exclamation-circle,
+        .alert.error .msg,
+        .alert.error .close-btn .fas {
+            color: #f44336;
+        }
+
+        .alert.error .close-btn {
+            background: #ff9999;
+        }
+
+        /* Responsive Alert */
+        @media (max-width: 768px) {
+            .alert {
+                min-width: 280px;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alert {
+                min-width: 220px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .alert .msg {
+                font-size: 14px;
+                padding: 0 10px 0 30px;
+            }
+
+            .alert .fa-exclamation-circle {
+                font-size: 20px;
+                left: 10px;
+            }
+
+            .alert .close-btn {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+    <div class="spinner"></div>
+    <div class="preloader-text" id="preloaderText">Processing your request...</div>
+</div>
+
+<!-- Custom Alert Notification -->
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">This is an alert message</span>
+    <div class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+
+<!-- Header Section -->
+<header class="donation-header">
+    <a href="profile.html" class="back-button">
+        <i class='bx bx-arrow-back'></i>
+    </a>
+    <h1>Донорство крови</h1>
+    <p>Сдавая кровь, вы спасаете жизни. Каждая донация может помочь нескольким пациентам.</p>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Calendar Section -->
+    <section class="calendar-section">
+        <div class="calendar-card">
+            <h2 class="card-title"><i class='bx bx-calendar'></i> Выберите дату для донации</h2>
+            <div class="calendar-wrapper">
+                <header class="calendar-header">
+                    <p class="current-date"></p>
+                    <div class="icons">
+                        <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                        <span id="next" class="material-symbols-rounded">chevron_right</span>
+                    </div>
+                </header>
+                <div class="calendar">
+                    <ul class="weeks">
+                        <li>Пн</li>
+                        <li>Вт</li>
+                        <li>Ср</li>
+                        <li>Чт</li>
+                        <li>Пт</li>
+                        <li>Сб</li>
+                        <li>Вс</li>
+                    </ul>
+                    <ul class="days"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Test Section -->
+    <section class="test-section">
+        <div class="test-card">
+            <h2 class="test-title">Узнай, можешь ли ты стать донором</h2>
+            <button class="test-btn" id="eligibilityTest">Пройти тест</button>
+            <button class="test-btn" id="contraindicationsBtn">Абсолютные противопоказания</button>
+            <div class="contraindications" id="contraindications">
+                <h3>Абсолютные противопоказания:</h3>
+                <ul>
+                    <li>ВИЧ-инфекция</li>
+                    <li>Гепатит B или C</li>
+                    <li>Сифилис</li>
+                    <li>Туберкулез</li>
+                    <li>Злокачественные новообразования</li>
+                    <li>Болезни крови</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-card">
+            <h2 class="card-title"><i class='bx bx-edit'></i> Заполните анкету</h2>
+            <form id="donationForm">
+                <div class="form-group">
+                    <label for="firstName">Имя</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">Город</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="hospital">Больница</label>
+                    <input type="text" id="hospital" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Дата рождения</label>
+                    <div class="calendar-wrapper birth-calendar">
+                        <header class="calendar-header">
+                            <p class="current-date birth-date"></p>
+                            <div class="icons">
+                                <span class="birth-prev material-symbols-rounded">chevron_left</span>
+                                <span class="birth-next material-symbols-rounded">chevron_right</span>
+                            </div>
+                        </header>
+                        <div class="calendar">
+                            <ul class="weeks">
+                                <li>Пн</li>
+                                <li>Вт</li>
+                                <li>Ср</li>
+                                <li>Чт</li>
+                                <li>Пт</li>
+                                <li>Сб</li>
+                                <li>Вс</li>
+                            </ul>
+                            <ul class="birth-days"></ul>
+                        </div>
+                    </div>
+                    <input type="hidden" id="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="bloodType">Группа крови</label>
+                    <select id="bloodType" required>
+                        <option value="">Выберите группу крови</option>
+                        <option value="1">I (0)</option>
+                        <option value="2">II (A)</option>
+                        <option value="3">III (B)</option>
+                        <option value="4">IV (AB)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section">
+        <div class="info-card">
+            <h2 class="info-title"><i class='bx bx-book-open'></i> Прочитай перед сдачей крови</h2>
+            <div class="info-content">
+                <p><strong>Подготовка к донации:</strong></p>
+                <ul>
+                    <li>Выспитесь перед сдачей крови</li>
+                    <li>Не употребляйте алкоголь за 48 часов до донации</li>
+                    <li>Не курите за 2 часа до и после сдачи крови</li>
+                    <li>Плотно позавтракайте в день донации</li>
+                    <li>Пейте больше жидкости перед сдачей крови</li>
+                </ul>
+                <p><strong>После донации:</strong></p>
+                <ul>
+                    <li>Отдохните 10-15 минут после процедуры</li>
+                    <li>Не снимайте повязку в течение 4 часов</li>
+                    <li>Избегайте физических нагрузок в течение суток</li>
+                    <li>Пейте больше жидкости в течение 48 часов</li>
+                    <li>Не курите в течение 2 часов после донации</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Test Modal -->
+<div class="test-modal" id="testModal">
+    <div class="test-content">
+        <span class="close-modal" id="closeTestModal">×</span>
+
+        <div class="test-progress">
+            <div class="test-progress-bar" id="testProgress"></div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="test-question active" data-question="1">
+            <h3>1. Сколько вам лет?</h3>
+            <div class="test-options">
+                <div class="test-option" data-value="under18">Менее 18 лет</div>
+                <div class="test-option" data-value="18-60">От 18 до 60 лет</div>
+                <div class="test-option" data-value="over60">Более 60 лет</div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="test-question" data-question="2">
+            <h3>2. Ваш вес?</h3>
+            <div class="test-options">
+                <div class="test-option" data-value="under50">Менее 50 кг</div>
+                <div class="test-option" data-value="50-100">От 50 до 100 кг</div>
+                <div class="test-option" data-value="over100">Более 100 кг</div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="test-question" data-question="3">
+            <h3>3. Когда вы последний раз сдавали кровь?</h3>
+            <div class="test-options">
+                <div class="test-option" data-value="less2">Менее 2 месяцев назад</div>
+                <div class="test-option" data-value="2-12">От 2 до 12 месяцев назад</div>
+                <div class="test-option" data-value="never">Никогда не сдавал(а)</div>
+                <div class="test-option" data-value="over12">Более года назад</div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="test-question" data-question="4">
+            <h3>4. Есть ли у вас хронические заболевания?</h3>
+            <div class="test-options">
+                <div class="test-option" data-value="yes">Да</div>
+                <div class="test-option" data-value="no">Нет</div>
+                <div class="test-option" data-value="notsure">Не уверен(а)</div>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="test-question" data-question="5">
+            <h3>5. Принимали ли вы лекарства в последние 2 недели?</h3>
+            <div class="test-options">
+                <div class="test-option" data-value="yes">Да</div>
+                <div class="test-option" data-value="no">Нет</div>
+            </div>
+        </div>
+
+        <!-- Test Result -->
+        <div class="test-result" id="testResult">
+            <div class="test-result-icon">
+                <i class='bx bx-check-circle'></i>
+            </div>
+            <h3 class="test-result-title" id="resultTitle">Вы можете быть донором!</h3>
+            <p class="test-result-message" id="resultMessage">Спасибо за прохождение теста. По результатам вы можете стать донором крови.</p>
+            <button class="test-restart" id="restartTest">Пройти тест снова</button>
+        </div>
+
+        <div class="test-navigation">
+            <button class="test-btn test-prev" id="prevQuestion" disabled>Назад</button>
+            <button class="test-btn test-next" id="nextQuestion">Далее</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Navigation -->
+<nav class="footer-nav">
+    <a href="../app/home.html" class="nav-item">
+        <i class='bx bx-home'></i>
+        <span>Home</span>
+    </a>
+    <a href="../app/help.html" class="nav-item">
+        <i class='bx bx-donate-heart'></i>
+        <span>Help</span>
+    </a>
+    <a href="donations.html" class="nav-item active">
+        <i class='bx bx-droplet'></i>
+        <span>Donations</span>
+    </a>
+    <a href="locations.html" class="nav-item">
+        <i class='bx bx-map'></i>
+        <span>Locations</span>
+    </a>
+    <a href="profile.html" class="nav-item">
+        <i class='bx bx-user'></i>
+        <span>Profile</span>
+    </a>
+</nav>
+
+<script>
+    // DOM Elements
+    const preloader = document.getElementById('preloader');
+    const preloaderText = document.getElementById('preloaderText');
+    const notification = document.querySelector('.alert');
+    const notificationMsg = document.querySelector('.msg');
+    const closeNotificationBtn = document.querySelector('.close-btn');
+
+    // Donation Calendar functionality
+    const daysTag = document.querySelector(".days"),
+        currentDate = document.querySelector(".current-date"),
+        prevNextIcon = document.querySelectorAll(".icons span");
+
+    // Birth Date Calendar functionality
+    const birthDaysTag = document.querySelector(".birth-days"),
+        birthCurrentDate = document.querySelector(".birth-date"),
+        birthPrevNextIcon = document.querySelectorAll(".birth-calendar .icons span");
+
+    // Getting new date, current year and month
+    let date = new Date(),
+        currYear = date.getFullYear(),
+        currMonth = date.getMonth();
+
+    let birthDate = new Date(),
+        birthCurrYear = birthDate.getFullYear(),
+        birthCurrMonth = birthDate.getMonth();
+
+    // Storing full name of all months in array
+    const months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль",
+        "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
+    const renderCalendar = (type = 'donation') => {
+        let targetDate, currYear, currMonth, daysTag, currentDate;
+        if (type === 'birth') {
+            targetDate = birthDate;
+            currYear = birthCurrYear;
+            currMonth = birthCurrMonth;
+            daysTag = birthDaysTag;
+            currentDate = birthCurrentDate;
+        } else {
+            targetDate = date;
+            currYear = currYear;
+            currMonth = currMonth;
+            daysTag = daysTag;
+            currentDate = currentDate;
+        }
+
+        let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(),
+            lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(),
+            lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(),
+            lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
+        let liTag = "";
+
+        // Adjust for Monday as first day of week
+        firstDayofMonth = firstDayofMonth === 0 ? 6 : firstDayofMonth - 1;
+
+        for (let i = firstDayofMonth; i > 0; i--) {
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        }
+
+        for (let i = 1; i <= lastDateofMonth; i++) {
+            let isToday = i === targetDate.getDate() && currMonth === new Date().getMonth()
+            && currYear === new Date().getFullYear() ? "active" : "";
+            liTag += `<li class="${isToday}" data-date="${i}.${currMonth + 1}.${currYear}">${i}</li>`;
+        }
+
+        for (let i = lastDayofMonth; i < 6; i++) {
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
+        }
+
+        currentDate.innerText = `${months[currMonth]} ${currYear}`;
+        daysTag.innerHTML = liTag;
+
+        // Add event listeners to all day elements
+        document.querySelectorAll(`.${type === 'birth' ? 'birth-' : ''}days li:not(.inactive)`).forEach(day => {
+            day.addEventListener('click', function() {
+                document.querySelectorAll(`.${type === 'birth' ? 'birth-' : ''}days li`).forEach(d => d.classList.remove('active'));
+                this.classList.add('active');
+                const selectedDate = this.getAttribute('data-date');
+                if (type === 'birth') {
+                    document.getElementById('birthDate').value = selectedDate;
+                }
+                console.log(`Selected ${type} date:`, selectedDate);
+            });
+        });
+    }
+
+    renderCalendar('donation');
+    renderCalendar('birth');
+
+    // Donation calendar navigation
+    prevNextIcon.forEach(icon => {
+        icon.addEventListener("click", () => {
+            currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+
+            if (currMonth < 0 || currMonth > 11) {
+                date = new Date(currYear, currMonth, new Date().getDate());
+                currYear = date.getFullYear();
+                currMonth = date.getMonth();
+            } else {
+                date = new Date();
+            }
+            renderCalendar('donation');
+        });
+    });
+
+    // Birth date calendar navigation
+    birthPrevNextIcon.forEach(icon => {
+        icon.addEventListener("click", () => {
+            birthCurrMonth = icon.classList.contains('birth-prev') ? birthCurrMonth - 1 : birthCurrMonth + 1;
+
+            if (birthCurrMonth < 0 || birthCurrMonth > 11) {
+                birthDate = new Date(birthCurrYear, birthCurrMonth, new Date().getDate());
+                birthCurrYear = birthDate.getFullYear();
+                birthCurrMonth = birthDate.getMonth();
+            } else {
+                birthDate = new Date();
+            }
+            renderCalendar('birth');
+        });
+    });
+
+    // Contraindications toggle
+    const contraindicationsBtn = document.getElementById('contraindicationsBtn');
+    const contraindications = document.getElementById('contraindications');
+
+    contraindicationsBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        contraindications.classList.toggle('show');
+    });
+
+    // Form submission
+    const donationForm = document.getElementById('donationForm');
+    donationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const submitBtn = donationForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+
+        try {
+            showPreloader('Отправка вашей заявки...');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Отправка...';
+
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            showAlert('Ваша заявка на донорство крови успешно отправлена!', 'success');
+            donationForm.reset();
+        } catch (error) {
+            showAlert('Ошибка при отправке заявки. Пожалуйста, попробуйте позже.', 'error');
+            console.error('Form submission error:', error);
+        } finally {
+            hidePreloader();
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        }
+    });
+
+    // Eligibility Test Modal
+    const testModal = document.getElementById('testModal');
+    const eligibilityTestBtn = document.getElementById('eligibilityTest');
+    const closeTestModalBtn = document.getElementById('closeTestModal');
+    const testQuestions = document.querySelectorAll('.test-question');
+    const testOptions = document.querySelectorAll('.test-option');
+    const prevQuestionBtn = document.getElementById('prevQuestion');
+    const nextQuestionBtn = document.getElementById('nextQuestion');
+    const testProgress = document.getElementById('testProgress');
+    const testResult = document.getElementById('testResult');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultMessage = document.getElementById('resultMessage');
+    const restartTestBtn = document.getElementById('restartTest');
+
+    let currentQuestion = 1;
+    const totalQuestions = testQuestions.length;
+    const answers = {};
+
+    eligibilityTestBtn.addEventListener('click', () => {
+        testModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        resetTest();
+    });
+
+    closeTestModalBtn.addEventListener('click', () => {
+        testModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    testOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const currentOptions = this.closest('.test-question').querySelectorAll('.test-option');
+            currentOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            const questionNumber = this.closest('.test-question').dataset.question;
+            answers[questionNumber] = this.dataset.value;
+            nextQuestionBtn.disabled = false;
+        });
+    });
+
+    nextQuestionBtn.addEventListener('click', () => {
+        if (currentQuestion < totalQuestions) {
+            document.querySelector(`.test-question[data-question="${currentQuestion}"]`).classList.remove('active');
+            currentQuestion++;
+            document.querySelector(`.test-question[data-question="${currentQuestion}"]`).classList.add('active');
+            updateProgressBar();
+            prevQuestionBtn.disabled = false;
+            nextQuestionBtn.disabled = true;
+            if (currentQuestion === totalQuestions) {
+                nextQuestionBtn.textContent = 'Завершить тест';
+            }
+        } else {
+            showTestResult();
+        }
+    });
+
+    prevQuestionBtn.addEventListener('click', () => {
+        document.querySelector(`.test-question[data-question="${currentQuestion}"]`).classList.remove('active');
+        currentQuestion--;
+        document.querySelector(`.test-question[data-question="${currentQuestion}"]`).classList.add('active');
+        updateProgressBar();
+        if (currentQuestion === 1) {
+            prevQuestionBtn.disabled = true;
+        }
+        nextQuestionBtn.disabled = false;
+        nextQuestionBtn.textContent = 'Далее';
+    });
+
+    restartTestBtn.addEventListener('click', resetTest);
+
+    function updateProgressBar() {
+        const progress = (currentQuestion / totalQuestions) * 100;
+        testProgress.style.width = `${progress}%`;
+    }
+
+    function showTestResult() {
+        testQuestions.forEach(question => question.classList.remove('active'));
+        testResult.style.display = 'block';
+
+        let eligible = true;
+        let message = "Спасибо за прохождение теста. По результатам вы можете стать донором крови.";
+
+        if (answers['1'] === 'under18' || answers['1'] === 'over60') {
+            eligible = false;
+            message = "К сожалению, вы не можете быть донором крови по возрасту. Донорами могут быть люди от 18 до 60 лет.";
+        }
+
+        if (answers['2'] === 'under50') {
+            eligible = false;
+            message = "К сожалению, вы не можете быть донором крови из-за недостаточного веса (менее 50 кг).";
+        }
+
+        if (answers['3'] === 'less2') {
+            eligible = false;
+            message = "К сожалению, вы не можете сдавать кровь чаще чем раз в 2 месяца.";
+        }
+
+        if (answers['4'] === 'yes') {
+            eligible = false;
+            message = "К сожалению, наличие хронических заболеваний может быть противопоказанием к донорству. Проконсультируйтесь с врачом.";
+        }
+
+        if (answers['5'] === 'yes') {
+            eligible = false;
+            message = "Прием лекарственных препаратов может быть временным противопоказанием к донорству. Проконсультируйтесь с врачом.";
+        }
+
+        if (eligible) {
+            resultTitle.textContent = "Вы можете быть донором!";
+            resultMessage.textContent = message;
+            document.querySelector('.test-result-icon').innerHTML = '<i class="bx bx-check-circle"></i>';
+        } else {
+            resultTitle.textContent = "К сожалению, вы не можете быть донором";
+            resultMessage.textContent = message;
+            document.querySelector('.test-result-icon').innerHTML = '<i class="bx bx-x-circle"></i>';
+        }
+
+        prevQuestionBtn.style.display = 'none';
+        nextQuestionBtn.style.display = 'none';
+    }
+
+    function resetTest() {
+        currentQuestion = 1;
+        for (let key in answers) {
+            delete answers[key];
+        }
+
+        testQuestions.forEach(question => {
+            question.classList.remove('active');
+            const options = question.querySelectorAll('.test-option');
+            options.forEach(option => option.classList.remove('selected'));
+        });
+
+        document.querySelector('.test-question[data-question="1"]').classList.add('active');
+        testProgress.style.width = '0%';
+        prevQuestionBtn.disabled = true;
+        nextQuestionBtn.disabled = true;
+        nextQuestionBtn.textContent = 'Далее';
+        prevQuestionBtn.style.display = 'block';
+        nextQuestionBtn.style.display = 'block';
+        testResult.style.display = 'none';
+    }
+
+    function showAlert(message, type = '') {
+        notification.classList.add(type);
+        notificationMsg.textContent = message;
+        notification.classList.add('show');
+        notification.classList.add('showAlert');
+
+        setTimeout(() => {
+            hideAlert();
+        }, 5000);
+    }
+
+    function hideAlert() {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+
+        setTimeout(() => {
+            notification.classList.remove('showAlert');
+            notification.classList.remove('hide');
+            notification.className = notification.className.replace(/\b(error|success)\b/g, '');
+        }, 500);
+    }
+
+    closeNotificationBtn.addEventListener('click', hideAlert);
+
+    function showPreloader(text = '') {
+        if (text) {
+            preloaderText.textContent = text;
+        }
+        preloader.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hidePreloader() {
+        preloader.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === testModal) {
+            testModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+</script>
+</body>
+</html>

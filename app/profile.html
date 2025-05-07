@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonorLink - My Profile</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --primary-dark: #c0392b;
+            --secondary: #3498db;
+            --accent: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Header Styles */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 2rem 1rem 4rem;
+            text-align: center;
+            position: relative;
+            margin-bottom: 80px;
+            clip-path: ellipse(100% 60% at 50% 35%);
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: var(--white);
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--white);
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-image i {
+            font-size: 3.5rem;
+            color: var(--primary);
+        }
+
+        .profile-image:hover {
+            opacity: 0.9;
+        }
+
+        .profile-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .profile-image-container:hover .profile-image-overlay {
+            opacity: 1;
+        }
+
+        .profile-image-overlay i {
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-blood-type {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .profile-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .profile-location i {
+            margin-right: 5px;
+        }
+
+        /* Profile Content */
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .info-item {
+            margin-bottom: 1rem;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-value {
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--light);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .badge.primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .donation-history {
+            list-style: none;
+        }
+
+        .donation-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .donation-item:last-child {
+            border-bottom: none;
+        }
+
+        .donation-date {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .donation-amount {
+            font-weight: 600;
+        }
+
+        .donation-location {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Stats */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Edit Button */
+        .edit-profile-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .edit-profile-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 16px;
+            transition: var(--transition);
+        }
+
+        .nav-item.active, .nav-item:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gray);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Upload Button */
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .upload-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .upload-btn input[type="file"] {
+            display: none;
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        .preloader-text {
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Custom Alert Notification */
+        .alert {
+            background: #ffdb9b;
+            padding: 15px 30px;
+            min-width: 350px;
+            position: fixed;
+            right: 0;
+            top: 10px;
+            border-radius: 4px;
+            border-left: 6px solid #ffa502;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1001;
+        }
+
+        .alert.showAlert {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .alert.show {
+            animation: show_slide 0.8s ease forwards;
+        }
+
+        @keyframes show_slide {
+            0% { transform: translateX(100%); }
+            40% { transform: translateX(-5%); }
+            80% { transform: translateX(0%); }
+            100% { transform: translateX(-5px); }
+        }
+
+        .alert.hide {
+            animation: hide_slide 0.8s ease forwards;
+        }
+
+        @keyframes hide_slide {
+            0% { transform: translateX(-5px); }
+            40% { transform: translateX(0%); }
+            80% { transform: translateX(-5%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .alert .fa-exclamation-circle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ce8500;
+            font-size: 24px;
+        }
+
+        .alert .msg {
+            padding: 0 15px 0 35px;
+            font-size: 16px;
+            color: #ce8500;
+        }
+
+        .alert .close-btn {
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffd080;
+            padding: 15px 15px;
+            cursor: pointer;
+        }
+
+        .alert .close-btn:hover {
+            background: #ffc766;
+        }
+
+        .alert .close-btn .fas {
+            color: #ce8500;
+            font-size: 18px;
+            line-height: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                margin-bottom: 60px;
+                clip-path: ellipse(150% 60% at 50% 35%);
+            }
+
+            .alert {
+                min-width: 280px;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-image i {
+                font-size: 2.5rem;
+            }
+
+            .footer-nav {
+                padding: 8px 0;
+            }
+
+            .nav-item {
+                padding: 6px 10px;
+            }
+
+            .nav-item i {
+                font-size: 1.3rem;
+            }
+
+            .nav-item span {
+                font-size: 0.7rem;
+            }
+
+            .alert {
+                min-width: 220px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .alert .msg {
+                font-size: 14px;
+                padding: 0 10px 0 30px;
+            }
+
+            .alert .fa-exclamation-circle {
+                font-size: 20px;
+                left: 10px;
+            }
+
+            .alert .close-btn {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+    <div class="spinner"></div>
+    <div class="preloader-text">Loading your profile...</div>
+</div>
+
+<!-- Custom Alert Notification -->
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">Warning: This is a warning alert!</span>
+    <div class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+
+<!-- Header Section -->
+<header class="profile-header">
+    <div class="profile-image-container">
+        <div class="profile-image" id="profileImage">
+            <i class='bx bx-user'></i>
+        </div>
+        <div class="profile-image-overlay">
+            <i class='bx bx-camera'></i>
+        </div>
+    </div>
+    <h1 class="profile-name" id="profileName">Alisher Rashit</h1>
+    <div class="profile-blood-type" id="profileBloodType">B-</div>
+    <div class="profile-location">
+        <i class='bx bx-map'></i>
+        <span id="profileLocation">Almaty, Kazakhstan</span>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="profile-container">
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-number" id="donationsCount">12</div>
+            <div class="stat-label">Donations</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="livesSaved">24</div>
+            <div class="stat-label">Lives Saved</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="lastDonation">2</div>
+            <div class="stat-label">Months Ago</div>
+        </div>
+    </div>
+
+    <!-- Personal Info Section -->
+    <div class="profile-card">
+        <h2 class="card-title"><i class='bx bx-user'></i> Personal Information</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Full Name</div>
+                <div class="info-value" id="fullName">Alisher Rashit</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Date of Birth</div>
+                <div class="info-value" id="dob">15 March 1990</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Email</div>
+                <div class="info-value" id="email">alisher.rashit@example.com</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Phone</div>
+                <div class="info-value" id="phone">+7 777 123 4567</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Gender</div>
+                <div class="info-value" id="gender">Male</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Weight</div>
+                <div class="info-value" id="weight">75 kg</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Info Section -->
+    <div class="profile-card">
+        <h2 class="card-title"><i class='bx bx-heart'></i> Health Information</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <div class="info-label">Blood Type</div>
+                <div class="info-value" id="bloodType">B-</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Last Donation</div>
+                <div class="info-value" id="lastDonationDate">2 months ago</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Eligible to Donate</div>
+                <div class="info-value" id="eligible">Yes</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Health Conditions</div>
+                <div class="info-value" id="healthConditions">None</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donation History Section -->
+    <div class="profile-card">
+        <h2 class="card-title"><i class='bx bx-history'></i> Donation History</h2>
+        <ul class="donation-history" id="donationHistory">
+            <!-- Will be populated by JavaScript -->
+        </ul>
+    </div>
+
+    <!-- Edit Profile Button -->
+    <button class="edit-profile-btn" id="editProfileBtn">Edit Profile</button>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal" id="editProfileModal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <h2 style="margin-bottom: 1.5rem;">Edit Profile</h2>
+
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="editName">Full Name</label>
+                <input type="text" id="editName" value="Alisher Rashit">
+            </div>
+
+            <div class="form-group">
+                <label for="editEmail">Email</label>
+                <input type="email" id="editEmail" value="alisher.rashit@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="editPhone">Phone</label>
+                <input type="tel" id="editPhone" value="+7 777 123 4567">
+            </div>
+
+            <div class="form-group">
+                <label for="editLocation">Location</label>
+                <input type="text" id="editLocation" value="Almaty, Kazakhstan">
+            </div>
+
+            <div class="form-group">
+                <label for="editBloodType">Blood Type</label>
+                <select id="editBloodType">
+                    <option value="">Select blood type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+" selected>B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="editHealth">Health Conditions</label>
+                <textarea id="editHealth">None</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <label for="profileUpload" class="upload-btn">
+                    <i class='bx bx-upload'></i> Upload New Photo
+                </label>
+                <input type="file" id="profileUpload" accept="image/*">
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="cancelEdit">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Photo Upload Modal -->
+<div class="modal" id="uploadModal">
+    <div class="modal-content" style="max-width: 400px;">
+        <span class="close-modal" id="closeUploadModal">&times;</span>
+        <h2 style="margin-bottom: 1.5rem;">Change Profile Picture</h2>
+
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <div id="imagePreviewContainer" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #ddd; margin: 0 auto 1rem; overflow: hidden;">
+                <img id="imagePreview" src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <label for="imageUpload" class="upload-btn" style="display: inline-block;">
+                <i class='bx bx-image-add'></i> Select Image
+            </label>
+            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn btn-outline" id="cancelUpload">Cancel</button>
+            <button type="button" class="btn btn-primary" id="confirmUpload" disabled>Save Photo</button>
+        </div>
+    </div>
+</div>
+
+<nav class="footer-nav">
+    <a href="../app/home.html" class="nav-item">
+        <i class='bx bx-home'></i>
+        <span>Home</span>
+    </a>
+    <a href="../app/help.html" class="nav-item">
+        <i class='bx bx-donate-heart'></i>
+        <span>Help</span>
+    </a>
+    <a href="donations.html" class="nav-item">
+        <i class='bx bx-droplet'></i>
+        <span>Donations</span>
+    </a>
+    <a href="locations.html" class="nav-item">
+        <i class='bx bx-map'></i>
+        <span>Locations</span>
+    </a>
+    <a href="profile.html" class="nav-item active">
+        <i class='bx bx-user'></i>
+        <span>Profile</span>
+    </a>
+</nav>
+
+
+<script>
+    // DOM Elements
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeModal = document.getElementById('closeModal');
+    const cancelEdit = document.getElementById('cancelEdit');
+    const profileForm = document.getElementById('profileForm');
+    const uploadModal = document.getElementById('uploadModal');
+    const closeUploadModal = document.getElementById('closeUploadModal');
+    const cancelUpload = document.getElementById('cancelUpload');
+    const confirmUpload = document.getElementById('confirmUpload');
+    const imageUpload = document.getElementById('imageUpload');
+    const imagePreview = document.getElementById('imagePreview');
+    const profileUpload = document.getElementById('profileUpload');
+    const preloader = document.getElementById('preloader');
+    const notification = document.querySelector('.alert');
+    const notificationMsg = document.querySelector('.msg');
+
+    // Profile elements
+    const profileName = document.getElementById('profileName');
+    const profileImage = document.getElementById('profileImage');
+    const profileBloodType = document.getElementById('profileBloodType');
+    const profileLocation = document.getElementById('profileLocation');
+    const fullName = document.getElementById('fullName');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const bloodType = document.getElementById('bloodType');
+    const donationHistory = document.getElementById('donationHistory');
+
+    // Form elements
+    const editName = document.getElementById('editName');
+    const editEmail = document.getElementById('editEmail');
+    const editPhone = document.getElementById('editPhone');
+    const editLocation = document.getElementById('editLocation');
+    const editBloodType = document.getElementById('editBloodType');
+    const editHealth = document.getElementById('editHealth');
+
+    // Mock user data with lastSync timestamp
+    let userData = {
+        id: 'user123',
+        name: 'Alisher Rashit',
+        email: 'alisher.rashit@example.com',
+        phone: '+7 777 123 4567',
+        location: 'Almaty, Kazakhstan',
+        bloodType: 'B-',
+        dob: '15 March 1990',
+        gender: 'Male',
+        weight: '75 kg',
+        healthConditions: 'None',
+        lastDonation: '2 months ago',
+        eligible: 'Yes',
+        donationsCount: 12,
+        livesSaved: 24,
+        lastDonationMonths: 2,
+        profileImage: '',
+        donationHistory: [
+            { date: '15 May 2023', location: 'City Blood Center, Almaty', amount: '1 unit' },
+            { date: '10 March 2023', location: 'Regional Hospital, Almaty', amount: '1 unit' },
+            { date: '15 January 2023', location: 'Red Crescent Center', amount: '1 unit' },
+            { date: '20 November 2022', location: 'City Blood Center, Almaty', amount: '1 unit' },
+            { date: '5 September 2022', location: 'Regional Hospital, Almaty', amount: '1 unit' }
+        ],
+        lastSync: new Date().toISOString()
+    };
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+        // Load cached data first for instant display
+        const cachedData = localStorage.getItem('donorLinkProfile');
+        if (cachedData) {
+            try {
+                const parsedData = JSON.parse(cachedData);
+                userData = parsedData;
+                renderProfile(userData);
+            } catch (e) {
+                console.error('Failed to parse cached data', e);
+            }
+        }
+
+        // Then fetch fresh data
+        initializePage();
+
+        // Set up other event listeners
+        setupEventListeners();
+    });
+
+    // Initialize page with user data
+    async function initializePage() {
+        showPreloader('Loading your profile...');
+
+        try {
+            // In a real app, this would fetch from your API
+            const data = await mockFetchUserData();
+            updateUserData(data);
+            renderProfile(data);
+
+            // Start auto-sync after initial load
+            startAutoSync();
+        } catch (error) {
+            showAlert('Failed to load profile data. Please try again.', 'error');
+            console.error('Initialization error:', error);
+        } finally {
+            hidePreloader();
+        }
+    }
+
+    // Mock API function to fetch user data
+    async function mockFetchUserData() {
+        // Simulate network delay (800ms - 1.5s)
+        const delay = 800 + Math.random() * 700;
+        await new Promise(resolve => setTimeout(resolve, delay));
+
+        // Simulate occasional new donations (20% chance)
+        const hasNewDonation = Math.random() > 0.8;
+
+        // Generate mock updated data
+        return {
+            ...userData,
+            donationsCount: hasNewDonation ? userData.donationsCount + 1 : userData.donationsCount,
+            livesSaved: hasNewDonation ? userData.livesSaved + 2 : userData.livesSaved,
+            lastDonationMonths: hasNewDonation ? 0 : userData.lastDonationMonths,
+            lastDonation: hasNewDonation ? 'Today' : userData.lastDonation,
+            eligible: hasNewDonation ? 'No (recent donation)' : userData.eligible,
+            donationHistory: hasNewDonation ? [
+                {
+                    date: new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }),
+                    location: 'City Blood Center, Almaty',
+                    amount: '1 unit'
+                },
+                ...userData.donationHistory
+            ] : userData.donationHistory,
+            lastSync: new Date().toISOString()
+        };
+    }
+
+    // Update local user data with new data
+    function updateUserData(newData) {
+        const oldData = { ...userData };
+        userData = { ...userData, ...newData };
+
+        // Store in localStorage
+        localStorage.setItem('donorLinkProfile', JSON.stringify(userData));
+
+        // Return whether data changed
+        return JSON.stringify(oldData) !== JSON.stringify(userData);
+    }
+
+    // Render profile data to the UI
+    function renderProfile(data) {
+        profileName.textContent = data.name;
+        profileBloodType.textContent = data.bloodType;
+        profileLocation.textContent = data.location;
+        fullName.textContent = data.name;
+        email.textContent = data.email;
+        phone.textContent = data.phone;
+        document.getElementById('dob').textContent = data.dob;
+        document.getElementById('gender').textContent = data.gender;
+        document.getElementById('weight').textContent = data.weight;
+        bloodType.textContent = data.bloodType;
+        document.getElementById('lastDonationDate').textContent = data.lastDonation;
+        document.getElementById('eligible').textContent = data.eligible;
+        document.getElementById('healthConditions').textContent = data.healthConditions;
+        document.getElementById('donationsCount').textContent = data.donationsCount;
+        document.getElementById('livesSaved').textContent = data.livesSaved;
+        document.getElementById('lastDonation').textContent = data.lastDonationMonths;
+
+        // Render donation history
+        donationHistory.innerHTML = '';
+        data.donationHistory.forEach(donation => {
+            const li = document.createElement('li');
+            li.className = 'donation-item';
+            li.innerHTML = `
+            <div>
+                <div class="donation-date">${donation.date}</div>
+                <div class="donation-location">${donation.location}</div>
+            </div>
+            <div class="donation-amount">${donation.amount}</div>
+        `;
+            donationHistory.appendChild(li);
+        });
+    }
+
+    // Auto-sync functionality
+    let syncInterval;
+    let isSyncing = false;
+
+    function startAutoSync() {
+        // Clear any existing interval
+        if (syncInterval) clearInterval(syncInterval);
+
+        // Sync every 2 minutes (120,000ms)
+        syncInterval = setInterval(async () => {
+            if (isSyncing) return;
+
+            isSyncing = true;
+            try {
+                const lastSync = new Date(userData.lastSync);
+                const now = new Date();
+
+                // Only sync if last sync was more than 1 minute ago
+                if ((now - lastSync) > 60000) {
+                    const data = await mockFetchUserData();
+                    const changed = updateUserData(data);
+
+                    if (changed) {
+                        renderProfile(userData);
+                        showAlert('Profile updated with new information!', 'success');
+                    }
+                }
+            } catch (error) {
+                console.error('Sync error:', error);
+            } finally {
+                isSyncing = false;
+            }
+        }, 120000);
+    }
+
+    // Preloader functions
+    function showPreloader(text) {
+        preloader.style.display = 'flex';
+        preloader.querySelector('.preloader-text').textContent = text || 'Loading...';
+    }
+
+    function hidePreloader() {
+        preloader.style.display = 'none';
+    }
+
+    // Custom Alert Functions
+    function showAlert(message, type = 'warning') {
+        // Set message and adjust styles based on type
+        notificationMsg.textContent = message;
+
+        if (type === 'success') {
+            notification.style.background = '#a8f0c1';
+            notification.style.borderLeft = '6px solid #4CAF50';
+            notification.querySelector('.fa-exclamation-circle').style.color = '#4CAF50';
+            notification.querySelector('.msg').style.color = '#4CAF50';
+            notification.querySelector('.close-btn').style.background = '#96e6a1';
+            notification.querySelector('.close-btn .fas').style.color = '#4CAF50';
+        } else if (type === 'error') {
+            notification.style.background = '#ffb3b3';
+            notification.style.borderLeft = '6px solid #f44336';
+            notification.querySelector('.fa-exclamation-circle').style.color = '#f44336';
+            notification.querySelector('.msg').style.color = '#f44336';
+            notification.querySelector('.close-btn').style.background = '#ff9999';
+            notification.querySelector('.close-btn .fas').style.color = '#f44336';
+        } else {
+            // Default warning style
+            notification.style.background = '#ffdb9b';
+            notification.style.borderLeft = '6px solid #ffa502';
+            notification.querySelector('.fa-exclamation-circle').style.color = '#ce8500';
+            notification.querySelector('.msg').style.color = '#ce8500';
+            notification.querySelector('.close-btn').style.background = '#ffd080';
+            notification.querySelector('.close-btn .fas').style.color = '#ce8500';
+        }
+
+        notification.classList.add("show");
+        notification.classList.remove("hide");
+        notification.classList.add("showAlert");
+
+        setTimeout(function(){
+            notification.classList.remove("show");
+            notification.classList.add("hide");
+        }, 5000);
+    }
+
+    // Close button event for alert
+    document.querySelector('.close-btn').addEventListener('click', function(){
+        notification.classList.remove("show");
+        notification.classList.add("hide");
+    });
+
+    // Setup all event listeners
+    function setupEventListeners() {
+        // Edit profile modal
+        editProfileBtn.addEventListener('click', () => {
+            editName.value = userData.name;
+            editEmail.value = userData.email;
+            editPhone.value = userData.phone;
+            editLocation.value = userData.location;
+            editBloodType.value = userData.bloodType;
+            editHealth.value = userData.healthConditions;
+            editProfileModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            editProfileModal.style.display = 'none';
+        });
+
+        cancelEdit.addEventListener('click', () => {
+            editProfileModal.style.display = 'none';
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === editProfileModal) editProfileModal.style.display = 'none';
+            if (e.target === uploadModal) uploadModal.style.display = 'none';
+        });
+
+        // Form submission
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = profileForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Saving...';
+            showPreloader('Saving your changes...');
+
+            try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Update user data
+                const updated = updateUserData({
+                    name: editName.value,
+                    email: editEmail.value,
+                    phone: editPhone.value,
+                    location: editLocation.value,
+                    bloodType: editBloodType.value,
+                    healthConditions: editHealth.value
+                });
+
+                renderProfile(userData);
+                editProfileModal.style.display = 'none';
+                showAlert('Profile updated successfully!', 'success');
+            } catch (error) {
+                showAlert('Failed to save profile. Please try again.', 'error');
+                console.error('Save error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Save Changes';
+                hidePreloader();
+            }
+        });
+
+        // Profile image click handler
+        profileImage.addEventListener('click', () => {
+            uploadModal.style.display = 'flex';
+        });
+
+        // Image upload handling
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    imagePreview.src = event.target.result;
+                    confirmUpload.disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Profile upload in edit form
+        profileUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                uploadProfileImage(file);
+            }
+        });
+
+        // Confirm upload
+        confirmUpload.addEventListener('click', async () => {
+            if (imageUpload.files[0]) {
+                confirmUpload.disabled = true;
+                confirmUpload.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Uploading...';
+                showPreloader('Updating your profile picture...');
+
+                try {
+                    const file = imageUpload.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = async (event) => {
+                        // Simulate upload delay
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+
+                        updateUserData({
+                            profileImage: event.target.result
+                        });
+
+                        uploadModal.style.display = 'none';
+                        showAlert('Profile picture updated!', 'success');
+                    };
+
+                    reader.readAsDataURL(file);
+                } catch (error) {
+                    showAlert('Failed to upload image. Please try again.', 'error');
+                    console.error('Upload error:', error);
+                } finally {
+                    imageUpload.value = '';
+                    confirmUpload.disabled = true;
+                    confirmUpload.textContent = 'Save Photo';
+                    hidePreloader();
+                }
+            }
+        });
+
+        // Cancel upload
+        cancelUpload.addEventListener('click', () => {
+            uploadModal.style.display = 'none';
+            imageUpload.value = '';
+            confirmUpload.disabled = true;
+        });
+
+        closeUploadModal.addEventListener('click', () => {
+            uploadModal.style.display = 'none';
+            imageUpload.value = '';
+            confirmUpload.disabled = true;
+        });
+    }
+
+    // Function to upload profile image
+    async function uploadProfileImage(file) {
+        showPreloader('Uploading your photo...');
+
+        try {
+            const reader = new FileReader();
+
+            reader.onload = async (event) => {
+                // Simulate upload delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                updateUserData({
+                    profileImage: event.target.result
+                });
+
+                showAlert('Profile picture updated!', 'success');
+            };
+
+            reader.onerror = () => {
+                throw new Error('Failed to read file');
+            };
+
+            reader.readAsDataURL(file);
+        } catch (error) {
+            showAlert('Failed to upload image. Please try again.', 'error');
+            console.error('Upload error:', error);
+        } finally {
+            hidePreloader();
+        }
+    }
+
+    // Clean up interval when page unloads
+    window.addEventListener('beforeunload', () => {
+        if (syncInterval) clearInterval(syncInterval);
+    });
+</script>
+</body>
+</html>
