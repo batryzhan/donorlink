@@ -44,6 +44,23 @@ body {
 }
 
 
+/* Add this new rule for editable fields */
+.info-value[data-editable="true"] {
+    background-color: var(--primary-light);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px dashed var(--primary);
+    outline: none;
+    cursor: text;
+    transition: all 0.2s ease;
+}
+
+.info-value[data-editable="true"]:focus {
+    background-color: var(--white);
+    border-style: solid;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
 /* Header Styles */
 
 .profile-header {
