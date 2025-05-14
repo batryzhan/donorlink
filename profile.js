@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Load saved user data from localStorage
+    const savedName = localStorage.getItem('userFullName');
+    const savedEmail = localStorage.getItem('userEmail');
+    
+    if (savedName) {
+        document.getElementById('profileName').textContent = savedName;
+        document.getElementById('fullName').textContent = savedName;
+    }
+    
+    if (savedEmail) {
+        document.getElementById('email').textContent = savedEmail;
+    }
+
     const editBtn = document.getElementById('editProfileBtn');
     const editableFields = document.querySelectorAll('.info-value');
     const preloader = document.getElementById('preloader');
@@ -50,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Sync profile name if full name was changed
             if (fullName.textContent !== profileName.textContent) {
                 profileName.textContent = fullName.textContent;
+                // Update in localStorage as well
+                localStorage.setItem('userFullName', fullName.textContent);
             }
 
             // Here you would typically send the updated data to your backend
