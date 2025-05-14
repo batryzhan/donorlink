@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kk">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DonorLink - Financial Support</title>
+    <title>DonorLink - Қаржылық қолдау</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
@@ -12,16 +12,16 @@
 </head>
 
 <body>
-    <!-- Preloader -->
+    <!-- Алдын ала жүктеу -->
     <div class="preloader" id="preloader">
         <div class="spinner"></div>
-        <div class="preloader-text">Processing your donation...</div>
+        <div class="preloader-text">Сіздің қайырымдылығыңыз өңделуде...</div>
     </div>
 
-    <!-- Custom Alert Notification -->
+    <!-- Арнайы ескерту хабарламасы -->
     <div class="alert hide">
         <span class="fas fa-exclamation-circle"></span>
-        <span class="msg">Warning: This is a warning alert!</span>
+        <span class="msg">Ескерту: Бұл ескерту хабарламасы!</span>
         <div class="close-btn">
             <span class="fas fa-times"></span>
         </div>
@@ -29,55 +29,55 @@
 
     <header class="help-header">
         <div class="container">
-            <h1>Financial Support Options</h1>
-            <p>Choose your preferred payment method to support our blood donation initiatives</p>
+            <h1>Қаржылық қолдау опциялары</h1>
+            <p>Қан донорлық бастамаларымызды қолдау үшін төлем әдісін таңдаңыз</p>
         </div>
     </header>
 
     <div class="container">
         <section class="donation-section">
             <div class="section-title">
-                <h2>Quick Online Donation</h2>
-                <p>Make a secure donation directly through our platform</p>
+                <h2>Жедел онлайн қайырымдылық</h2>
+                <p>Біздің платформа арқылы қауіпсіз қайырымдылық жасаңыз</p>
             </div>
 
             <form class="donation-form" id="donationForm">
                 <div class="form-group">
-                    <label for="amount">Donation Amount (₸)</label>
+                    <label for="amount">Қайырымдылық сомасы (₸)</label>
                     <div class="amount-options">
                         <div class="amount-btn" onclick="selectAmount(500)">500 ₸</div>
                         <div class="amount-btn" onclick="selectAmount(1000)">1,000 ₸</div>
                         <div class="amount-btn" onclick="selectAmount(5000)">5,000 ₸</div>
                         <div class="amount-btn" onclick="selectAmount(10000)">10,000 ₸</div>
                     </div>
-                    <input type="number" id="amount" placeholder="Or enter custom amount" min="500" step="500" required>
+                    <input type="number" id="amount" placeholder="Немесе өз сомаңызды енгізіңіз" min="500" step="500" required>
                 </div>
 
                 <div class="form-group custom-select">
-                    <label for="payment-method">Payment Method</label>
+                    <label for="payment-method">Төлем әдісі</label>
                     <div class="select-wrapper">
                         <select id="payment-method" required>
-                        <option value="">Select payment method</option>
+                        <option value="">Төлем әдісін таңдаңыз</option>
                         <option value="kaspi" data-icon="img/kaspilogo.png">Kaspi Bank</option>
                         <option value="halyq" data-icon="img/halyqlogo.png">Halyq Bank</option>
                         <option value="freedom" data-icon="img/freedomlogo.png">Freedom Bank</option>
                         <option value="simply" data-icon="img/simplebanklogo.png">Simply Bank</option>
-                        <option value="card">Credit/Debit Card</option>
+                        <option value="card">Несие/Дебет картасы</option>
                     </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" placeholder="Enter your name" required>
+                    <label for="name">Аты-жөніңіз</label>
+                    <input type="text" id="name" placeholder="Аты-жөніңізді енгізіңіз" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <label for="email">Электрондық пошта</label>
+                    <input type="email" id="email" placeholder="Электрондық поштаңызды енгізіңіз" required>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">Donate Now</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Қазір қайырымдылық жасау</button>
             </form>
         </section>
     </div>
@@ -85,23 +85,23 @@
     <nav class="footer-nav">
         <a href="home.html" class="nav-item">
             <i class='bx bx-home'></i>
-            <span>Home</span>
+            <span>Басты бет</span>
         </a>
         <a href="help.html" class="nav-item active">
             <i class='bx bx-donate-heart'></i>
-            <span>Help</span>
+            <span>Көмек</span>
         </a>
         <a href="donations.html" class="nav-item">
             <i class='bx bx-droplet'></i>
-            <span>Donations</span>
+            <span>Донорлық</span>
         </a>
         <a href="locations.html" class="nav-item">
             <i class='bx bx-map'></i>
-            <span>Locations</span>
+            <span>Орналасу</span>
         </a>
         <a href="profile.html" class="nav-item">
             <i class='bx bx-user'></i>
-            <span>Profile</span>
+            <span>Профиль</span>
         </a>
     </nav>
 
