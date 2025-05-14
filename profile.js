@@ -33,6 +33,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Helper functions
+    function enterEditMode() {
+        editableFields.forEach(field => {
+            field.contentEditable = true;
+            field.focus();
+        });
+        editBtn.innerHTML = `<i class='bx bx-save' style="margin-right: 8px;"></i> Save Changes`;
+        isEditMode = true;
+    }
+
+    async function saveChanges() {
+        try {
+            showPreloader('Saving changes...');
+
+            // Simulate API call with a delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Sync profile name if full name was changed
+            if (fullName.textContent !== profileName.textContent) {
+                profileName.textContent = fullName.textContent;
+                // Update in localStorage as well
+                localStorage.setItem('userFullName', fullName.textContent);
+            }
+
+            showAlert('Profile updated successfully!');
+        } catch (error) {
+            console.error('Error saving profile:', error);
+            showAlert('Error saving changes. Please try again.', 'error');
+        } finally {
+            exitEditMode();
+            hidePreloader();
+        }
+    }
+
+    function exitEditMode() {
+        editableFields.forEach(field => {
+            field.contentEditable = false;
+        });
+        editBtn.innerHTML = `<i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile`;
+        isEditMode = false;
+    }
+
+    // Edit Profile Button Handler
+    editBtn.addEventListener('click', async() => {
+        if (!isEditMode) {
+            // Enter edit mode
+            enterEditMode();
+        } else {
+            // Save changes
+            await saveChanges();
+        }
+    });
+
     // Profile Image Upload Handler
     profileImageButton.addEventListener('click', () => {
         handleProfileImageUpload();
