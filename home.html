@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonorLink - Connect to Save Lives</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Connect to Save Lives</h1>
+            <p>Join our community of donors and help those in urgent need of blood transfusions</p>
+            <a href="#patients" class="cta-button">Find Patients Near You</a>
+        </div>
+    </header>
+
+    <section class="patients-section" id="patients">
+        <div class="section-title">
+            <h2>Patients Needing Blood</h2>
+            <p>These individuals urgently need your help. Your donation can save their lives.</p>
+        </div>
+
+        <div class="patients-grid">
+            <!-- Patient 1 -->
+            <div class="patient-card">
+                <div class="patient-image">
+                    <i class='bx bxs-user-circle'></i>
+                    <div class="blood-type">A+</div>
+                </div>
+                <div class="patient-info">
+                    <h3>Amanbek Batyrzhan</h3>
+                    <p>Needs 2 units of blood for emergency surgery at City Hospital</p>
+                    <div class="patient-meta">
+                        <span><i class='bx bx-map'></i> 5km away</span>
+                        <span><i class='bx bx-time'></i> Urgent (24hrs)</span>
+                    </div>
+                    <button class="donate-btn" data-patient="Amanbek Batyrzhan">I Can Help</button>
+                </div>
+            </div>
+
+            <!-- Patient 2 -->
+            <div class="patient-card">
+                <div class="patient-image">
+                    <i class='bx bxs-user-circle'></i>
+                    <div class="blood-type">B-</div>
+                </div>
+                <div class="patient-info">
+                    <h3>Alisher Rashit</h3>
+                    <p>Chronic condition requires regular blood transfusions</p>
+                    <div class="patient-meta">
+                        <span><i class='bx bx-map'></i> 8km away</span>
+                        <span><i class='bx bx-time'></i> Within 3 days</span>
+                    </div>
+                    <button class="donate-btn" data-patient="Alisher Rashit">I Can Help</button>
+                </div>
+            </div>
+
+            <!-- Patient 3 -->
+            <div class="patient-card">
+                <div class="patient-image">
+                    <i class='bx bxs-user-circle'></i>
+                    <div class="blood-type">O+</div>
+                </div>
+                <div class="patient-info">
+                    <h3>Baizhigit Mukhamedia</h3>
+                    <p>Accident victim needing multiple blood transfusions</p>
+                    <div class="patient-meta">
+                        <span><i class='bx bx-map'></i> 12km away</span>
+                        <span><i class='bx bx-time'></i> Immediate</span>
+                    </div>
+                    <button class="donate-btn" data-patient="Baizhigit Mukhamedia">I Can Help</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="section-title">
+            <h2>Why Choose DonorLink</h2>
+            <p>We make the blood donation process simple, fast, and impactful</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-search-alt'></i>
+                </div>
+                <h3>Instant Matching</h3>
+                <p>Our smart system instantly connects donors with compatible patients in their area.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-bell'></i>
+                </div>
+                <h3>Real-Time Alerts</h3>
+                <p>Get notified when patients with your blood type need help nearby.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-certification'></i>
+                </div>
+                <h3>Verified Profiles</h3>
+                <p>All donors and recipients are carefully verified for safety and authenticity.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class='bx bx-heart'></i>
+                </div>
+                <h3>Save Lives</h3>
+                <p>Your donation can make the difference between life and death for someone in need.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Just three simple steps to become a lifesaver</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Register</h3>
+                <p>Create your profile as a donor or recipient in just a few minutes.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Get Matched</h3>
+                <p>Our system will connect you with compatible donors or patients in your area.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Donate/Receive</h3>
+                <p>Coordinate with hospitals or blood banks to complete the donation process.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Make a Difference?</h2>
+            <p>Join thousands of donors who are saving lives every day through DonorLink.</p>
+            <div class="cta-buttons">
+                <a href="donations.html" class="cta-button">Become a Donor</a>
+                <a href="donations.html" class="cta-button outline-button">Request Blood</a>
+            </div>
+        </div>
+    </section>
+
+    <nav class="footer-nav">
+        <a href="../app/home.html" class="nav-item active">
+            <i class='bx bx-home'></i>
+            <span>Home</span>
+        </a>
+        <a href="../app/help.html" class="nav-item">
+            <i class='bx bx-donate-heart'></i>
+            <span>Help</span>
+        </a>
+        <a href="../app/donations.html" class="nav-item">
+            <i class='bx bx-droplet'></i>
+            <span>Donations</span>
+        </a>
+        <a href="locations.html" class="nav-item">
+            <i class='bx bx-map'></i>
+            <span>Locations</span>
+        </a>
+        <a href="../app/profile.html" class="nav-item">
+            <i class='bx bx-user'></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">Processing your donation...</div>
+    </div>
+
+    <!-- Custom Alert Notification -->
+    <div class="alert" id="alert">
+        <i class='bx bx-check-circle'></i>
+        <span class="msg">Thank you for offering to help!</span>
+        <div class="close-btn">
+            <i class='bx bx-x'></i>
+        </div>
+    </div>
+    <script src="home.js"></script>
+</body>
+
+</html>
