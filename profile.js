@@ -1,370 +1,169 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Load saved user data from localStorage
-    const savedName = localStorage.getItem('userFullName');
-    const savedEmail = localStorage.getItem('userEmail');
-    
-    if (savedName) {
-        document.getElementById('profileName').textContent = savedName;
-        document.getElementById('fullName').textContent = savedName;
-    }
-    
-    if (savedEmail) {
-        document.getElementById('email').textContent = savedEmail;
-    }
-
-    const editBtn = document.getElementById('editProfileBtn');
-    const editableFields = document.querySelectorAll('.info-value');
-    const preloader = document.getElementById('preloader');
-    const alertBox = document.getElementById('alert');
-    const closeBtn = document.querySelector('.close-btn');
-    const profileImageButton = document.getElementById('profileImageButton');
-    const profileName = document.getElementById('profileName');
-    const fullName = document.getElementById('fullName');
-    let isEditMode = false;
-
-    // Edit Profile Button Handler
-    editBtn.addEventListener('click', async() => {
-        if (!isEditMode) {
-            // Enter edit mode
-            enterEditMode();
-        } else {
-            // Save changes
-            await saveChanges();
-        }
-    });
-
-    // Helper functions
-    function enterEditMode() {
-        editableFields.forEach(field => {
-            field.contentEditable = true;
-            field.focus();
-        });
-        editBtn.innerHTML = `<i class='bx bx-save' style="margin-right: 8px;"></i> Save Changes`;
-        isEditMode = true;
-    }
-
-    async function saveChanges() {
-        try {
-            showPreloader('Saving changes...');
-
-            // Simulate API call with a delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // Sync profile name if full name was changed
-            if (fullName.textContent !== profileName.textContent) {
-                profileName.textContent = fullName.textContent;
-                // Update in localStorage as well
-                localStorage.setItem('userFullName', fullName.textContent);
-            }
-
-            showAlert('Profile updated successfully!');
-        } catch (error) {
-            console.error('Error saving profile:', error);
-            showAlert('Error saving changes. Please try again.', 'error');
-        } finally {
-            exitEditMode();
-            hidePreloader();
-        }
-    }
-
-    function exitEditMode() {
-        editableFields.forEach(field => {
-            field.contentEditable = false;
-        });
-        editBtn.innerHTML = `<i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile`;
-        isEditMode = false;
-    }
-
-    // Edit Profile Button Handler
-    editBtn.addEventListener('click', async() => {
-        if (!isEditMode) {
-            // Enter edit mode
-            enterEditMode();
-        } else {
-            // Save changes
-            await saveChanges();
-        }
-    });
-
-    // Profile Image Upload Handler
-    profileImageButton.addEventListener('click', () => {
-        handleProfileImageUpload();
-    });
-
-    // Close alert button
-    closeBtn.addEventListener('click', () => {
-        hideAlert();
-    });
-
-    // Helper functions
-    function enterEditMode() {
-        editableFields.forEach(field => {
-            field.contentEditable = true;
-            field.focus();
-        });
-        editBtn.innerHTML = `<i class='bx bx-save' style="margin-right: 8px;"></i> Save Changes`;
-        isEditMode = true;
-    }
-
-    async function saveChanges() {
-        try {
-            showPreloader('Saving changes...');
-
-            // Simulate API call with a delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // Sync profile name if full name was changed
-            if (fullName.textContent !== profileName.textContent) {
-                profileName.textContent = fullName.textContent;
-                // Update in localStorage as well
-                localStorage.setItem('userFullName', fullName.textContent);
-            }
-
-            // Here you would typically send the updated data to your backend
-            // For this example, we'll just simulate it
-            const updatedData = {
-                fullName: fullName.textContent,
-                dob: document.getElementById('dob').textContent,
-                email: document.getElementById('email').textContent,
-                phone: document.getElementById('phone').textContent,
-                gender: document.getElementById('gender').textContent,
-                bloodType: document.getElementById('bloodType').textContent,
-                lastDonation: document.getElementById('lastDonationDate').textContent,
-                eligible: document.getElementById('eligible').textContent,
-                healthConditions: document.getElementById('healthConditions').textContent
-            };
-
-            console.log('Updated profile data:', updatedData);
-
-            showAlert('Profile updated successfully!');
-        } catch (error) {
-            console.error('Error saving profile:', error);
-            showAlert('Error saving changes. Please try again.', 'error');
-        } finally {
-            exitEditMode();
-            hidePreloader();
-        }
-    }
-
-    function exitEditMode() {
-        editableFields.forEach(field => {
-            field.contentEditable = false;
-        });
-        editBtn.innerHTML = `<i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile`;
-        isEditMode = false;
-    }
-
-    async function handleProfileImageUpload() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-
-        input.onchange = async(e) => {
-            const file = e.target.files[0];
-            if (file) {
-                try {
-                    showPreloader('Updating profile picture...');
-
-                    // Simulate image upload with a delay
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-
-                    // Update profile image
-                    const profileIcon = document.querySelector('.profile-image-icon');
-                    const imageUrl = URL.createObjectURL(file);
-
-                    // Check if there's already an image
-                    const existingImg = profileImageButton.querySelector('img');
-                    if (existingImg) {
-                        existingImg.src = imageUrl;
-                    } else {
-                        // Create image element
-                        const img = document.createElement('img');
-                        img.src = imageUrl;
-                        img.alt = "Profile";
-                        img.style.width = '100%';
-                        img.style.height = '100%';
-                        img.style.objectFit = 'cover';
-                        img.style.borderRadius = '50%';
-
-                        // Replace icon with image
-                        profileIcon.style.display = 'none';
-                        profileImageButton.querySelector('.profile-image-content').prepend(img);
-                    }
-
-                    showAlert('Profile picture updated!');
-                } catch (error) {
-                    console.error('Error updating profile image:', error);
-                    showAlert('Error updating profile picture', 'error');
-                } finally {
-                    hidePreloader();
-                }
-            }
-        };
-        input.click();
-    }
-
-    function showPreloader(text) {
-        preloader.querySelector('.preloader-text').textContent = text || 'Loading...';
-        preloader.style.display = 'flex';
-    }
-
-    function hidePreloader() {
-        preloader.style.display = 'none';
-    }
-
-    function showAlert(message, type = 'success') {
-        const msg = alertBox.querySelector('.msg');
-        const icon = alertBox.querySelector('i');
-
-        msg.textContent = message;
-
-        if (type === 'error') {
-            alertBox.style.background = '#f8d7da';
-            alertBox.style.borderLeft = '6px solid #dc3545';
-            icon.className = 'bx bx-error-circle';
-            msg.style.color = '#721c24';
-        } else {
-            alertBox.style.background = '#d4edda';
-            alertBox.style.borderLeft = '6px solid #28a745';
-            icon.className = 'bx bx-check-circle';
-            msg.style.color = '#155724';
-        }
-
-        alertBox.classList.add('show');
-
-        // Auto-hide after 5 seconds
-        setTimeout(() => {
-            hideAlert();
-        }, 5000);
-    }
-
-    function hideAlert() {
-        alertBox.classList.remove('show');
-        alertBox.classList.add('hide');
-
-        setTimeout(() => {
-            alertBox.classList.remove('hide');
-        }, 800);
-    }
-
-    // Add keyboard support for editable fields
-    editableFields.forEach(field => {
-        field.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                field.blur();
-            }
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const editBtn = document.getElementById('editProfileBtn');
+    const editProfileCard = document.getElementById('editProfileCard');
+    const overlay = document.getElementById('overlay');
+    const closeEditBtn = document.getElementById('closeEditBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const saveEditBtn = document.getElementById('saveEditBtn');
     const preloader = document.getElementById('preloader');
     const alertBox = document.getElementById('alert');
     const closeBtn = document.querySelector('.close-btn');
     const profileImageButton = document.getElementById('profileImageButton');
     
-    // Form field mappings
-    const editableFields = {
-        fullName: 'editFullName',
-        dob: 'editDob',
-        phone: 'editPhone',
-        gender: 'editGender',
-        bloodType: 'editBloodType',
-        location: 'editLocation',
-        lastDonation: 'editLastDonation',
-        healthConditions: 'editHealthConditions'
+    // Form fields
+    const formFields = {
+        fullName: {
+            display: document.getElementById('fullName'),
+            edit: document.getElementById('editCardFullName')
+        },
+        gender: {
+            display: document.getElementById('gender'),
+            edit: document.getElementById('editCardGender')
+        },
+        phone: {
+            display: document.getElementById('phone'),
+            edit: document.getElementById('editCardPhone')
+        },
+        dob: {
+            display: document.getElementById('dob'),
+            edit: document.getElementById('editCardDob')
+        },
+        bloodType: {
+            display: document.getElementById('bloodType'),
+            edit: document.getElementById('editCardBloodType')
+        },
+        location: {
+            display: document.getElementById('profileLocation'),
+            edit: document.getElementById('editCardLocation')
+        }
     };
-
-    let isEditMode = false;
-    let originalValues = {};
-
-    // Initial Load
+    
+    // Load saved user data
     loadUserData();
+    
+    // Setup event listeners
     setupEventListeners();
-
+    
     function loadUserData() {
-        // Load from localStorage
-        Object.entries(editableFields).forEach(([key, id]) => {
+        // Load data from localStorage
+        Object.keys(formFields).forEach(key => {
             const savedValue = localStorage.getItem(key);
-            if (savedValue) {
-                document.getElementById(key).textContent = savedValue;
-                document.getElementById(id).value = savedValue;
+            if (savedValue && formFields[key].display) {
+                formFields[key].display.textContent = savedValue;
+                
+                // Also set the form field value if it exists
+                if (formFields[key].edit) {
+                    if (formFields[key].edit.tagName === 'SELECT') {
+                        // For select elements, find and select the option
+                        const options = formFields[key].edit.options;
+                        for (let i = 0; i < options.length; i++) {
+                            if (options[i].value === savedValue) {
+                                formFields[key].edit.selectedIndex = i;
+                                break;
+                            }
+                        }
+                    } else {
+                        // For other input types
+                        formFields[key].edit.value = savedValue;
+                    }
+                }
             }
         });
-
+        
+        // Update profile name in header
+        const savedName = localStorage.getItem('fullName');
+        if (savedName) {
+            document.getElementById('profileName').textContent = savedName;
+        }
+        
+        // Update blood type in header
+        const savedBloodType = localStorage.getItem('bloodType');
+        if (savedBloodType) {
+            document.getElementById('profileBloodType').textContent = savedBloodType;
+        }
+        
         // Load profile image
         const savedImage = localStorage.getItem('profileImage');
         if (savedImage) {
             updateProfileImage(savedImage);
         }
     }
-
+    
     function setupEventListeners() {
-        // Edit/Save Button
-        editBtn.addEventListener('click', handleEditSave);
-
+        // Edit Profile Button - Open modal
+        editBtn.addEventListener('click', openEditProfileCard);
+        
+        // Close buttons
+        closeEditBtn.addEventListener('click', closeEditProfileCard);
+        cancelEditBtn.addEventListener('click', closeEditProfileCard);
+        overlay.addEventListener('click', closeEditProfileCard);
+        
+        // Save button
+        saveEditBtn.addEventListener('click', saveProfileChanges);
+        
         // Profile Image Upload
         profileImageButton.addEventListener('click', handleProfileImageUpload);
-
+        
         // Close Alert
         closeBtn.addEventListener('click', hideAlert);
     }
-
-    function handleEditSave() {
-        if (!isEditMode) {
-            enterEditMode();
-        } else {
-            saveChanges();
-        }
-    }
-
-    function enterEditMode() {
-        isEditMode = true;
-        document.body.classList.add('edit-mode');
-        editBtn.innerHTML = `<i class='bx bx-save'></i> Save Changes`;
-        
-        // Store original values
-        Object.entries(editableFields).forEach(([key, id]) => {
-            originalValues[key] = document.getElementById(key).textContent;
+    
+    function openEditProfileCard() {
+        // Populate form fields with current values
+        Object.keys(formFields).forEach(key => {
+            if (formFields[key].display && formFields[key].edit) {
+                if (formFields[key].edit.tagName === 'SELECT') {
+                    // For select elements, we already set this in loadUserData
+                } else {
+                    // For other input types
+                    formFields[key].edit.value = formFields[key].display.textContent;
+                }
+            }
         });
-    }
-
-    function saveChanges() {
-        showPreloader('Saving changes...');
         
+        // Show the modal and overlay
+        editProfileCard.classList.add('active');
+        overlay.style.display = 'block';
+    }
+    
+    function closeEditProfileCard() {
+        editProfileCard.classList.remove('active');
+        overlay.style.display = 'none';
+    }
+    
+    async function saveProfileChanges() {
         try {
-            // Update values and save to localStorage
-            Object.entries(editableFields).forEach(([key, id]) => {
-                const newValue = document.getElementById(id).value;
-                document.getElementById(key).textContent = newValue;
-                localStorage.setItem(key, newValue);
+            showPreloader('Saving changes...');
+            
+            // Simulate API call with a delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Update display values and save to localStorage
+            Object.keys(formFields).forEach(key => {
+                if (formFields[key].display && formFields[key].edit) {
+                    const newValue = formFields[key].edit.value;
+                    formFields[key].display.textContent = newValue;
+                    localStorage.setItem(key, newValue);
+                }
             });
-
-            // Update profile header
-            document.getElementById('profileName').textContent = 
-                document.getElementById('fullName').textContent;
-            document.getElementById('profileBloodType').textContent = 
-                document.getElementById('bloodType').textContent;
-
+            
+            // Update profile name in header
+            document.getElementById('profileName').textContent = formFields.fullName.edit.value;
+            
+            // Update blood type in header
+            document.getElementById('profileBloodType').textContent = formFields.bloodType.edit.value;
+            
             showAlert('Profile updated successfully!');
+            closeEditProfileCard();
         } catch (error) {
             console.error('Error saving profile:', error);
             showAlert('Error saving changes. Please try again.', 'error');
         } finally {
-            exitEditMode();
             hidePreloader();
         }
     }
-
-    function exitEditMode() {
-        isEditMode = false;
-        document.body.classList.remove('edit-mode');
-        editBtn.innerHTML = `<i class='bx bx-edit-alt'></i> Edit Profile`;
-    }
-
+    
     async function handleProfileImageUpload() {
         const input = document.createElement('input');
         input.type = 'file';
@@ -376,14 +175,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     showPreloader('Updating profile picture...');
                     
+                    // Read the file as data URL
                     const reader = new FileReader();
                     reader.onload = (e) => {
-                        localStorage.setItem('profileImage', e.target.result);
-                        updateProfileImage(e.target.result);
+                        const imageUrl = e.target.result;
+                        localStorage.setItem('profileImage', imageUrl);
+                        updateProfileImage(imageUrl);
                     };
                     reader.readAsDataURL(file);
-
+                    
+                    // Simulate upload delay
                     await new Promise(resolve => setTimeout(resolve, 1500));
+                    
                     showAlert('Profile picture updated!');
                 } catch (error) {
                     console.error('Error updating profile image:', error);
@@ -395,41 +198,72 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         input.click();
     }
-
+    
     function updateProfileImage(imageUrl) {
         const profileContent = document.querySelector('.profile-image-content');
-        profileContent.innerHTML = `
-            <img src="${imageUrl}" alt="Profile" class="profile-image">
-            ${document.querySelector('.profile-image-overlay').outerHTML}
-        `;
+        const existingImg = profileContent.querySelector('img');
+        const profileIcon = profileContent.querySelector('.profile-image-icon');
+        
+        if (existingImg) {
+            existingImg.src = imageUrl;
+        } else {
+            // Create new image element
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = "Profile";
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '50%';
+            
+            // Hide the icon and add the image
+            if (profileIcon) profileIcon.style.display = 'none';
+            profileContent.prepend(img);
+        }
     }
-
+    
     // UI Helpers
     function showPreloader(text) {
-        preloader.querySelector('.preloader-text').textContent = text;
+        preloader.querySelector('.preloader-text').textContent = text || 'Loading...';
         preloader.style.display = 'flex';
     }
-
+    
     function hidePreloader() {
         preloader.style.display = 'none';
     }
-
+    
     function showAlert(message, type = 'success') {
         const msg = alertBox.querySelector('.msg');
         const icon = alertBox.querySelector('i');
-
-        // Style based on type
-        alertBox.style.background = type === 'error' ? '#f8d7da' : '#d4edda';
-        alertBox.style.borderLeftColor = type === 'error' ? '#dc3545' : '#28a745';
-        icon.className = type === 'error' ? 'bx bx-error-circle' : 'bx bx-check-circle';
-        msg.style.color = type === 'error' ? '#721c24' : '#155724';
+        
         msg.textContent = message;
-
+        
+        if (type === 'error') {
+            alertBox.style.background = '#f8d7da';
+            alertBox.style.borderLeft = '6px solid #dc3545';
+            icon.className = 'bx bx-error-circle';
+            msg.style.color = '#721c24';
+        } else {
+            alertBox.style.background = '#d4edda';
+            alertBox.style.borderLeft = '6px solid #28a745';
+            icon.className = 'bx bx-check-circle';
+            msg.style.color = '#155724';
+        }
+        
         alertBox.classList.add('show');
-        setTimeout(hideAlert, 5000);
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            hideAlert();
+        }, 5000);
     }
-
+    
     function hideAlert() {
         alertBox.classList.remove('show');
+        alertBox.classList.add('hide');
+        
+        setTimeout(() => {
+            alertBox.classList.remove('hide');
+        }, 800);
     }
 });
