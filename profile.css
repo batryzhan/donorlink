@@ -651,7 +651,42 @@ body {
 .edit-profile-btn:active {
     transform: translateY(0);
 }
+/* Add these new styles */
+        .edit-input {
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: 600;
+            color: var(--dark);
+            background-color: var(--primary-light);
+            border: 1px dashed var(--primary);
+            border-radius: 5px;
+            padding: 5px 10px;
+            width: 100%;
+            outline: none;
+            display: none;
+        }
 
+        .edit-input:focus {
+            border-style: solid;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .edit-mode .info-value {
+            display: none;
+        }
+
+        .edit-mode .edit-input {
+            display: block;
+        }
+
+        .edit-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
+        }
 /* Editable field styling */
 .info-value[contenteditable="true"] {
     background-color: var(--primary-light);
@@ -660,3 +695,4 @@ body {
     border: 1px dashed var(--primary);
     outline: none;
 }
+
