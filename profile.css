@@ -607,6 +607,7 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
 /* Edit Button Styles */
 .edit-profile-btn {
     display: block;
@@ -651,42 +652,44 @@ body {
 .edit-profile-btn:active {
     transform: translateY(0);
 }
+
 /* Add these new styles */
-        .edit-input {
-            font-family: inherit;
-            font-size: inherit;
-            font-weight: 600;
-            color: var(--dark);
-            background-color: var(--primary-light);
-            border: 1px dashed var(--primary);
-            border-radius: 5px;
-            padding: 5px 10px;
-            width: 100%;
-            outline: none;
-            display: none;
-        }
+.edit-input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    color: var(--dark);
+    background-color: var(--primary-light);
+    border: 1px dashed var(--primary);
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+    outline: none;
+    display: none;
+}
 
-        .edit-input:focus {
-            border-style: solid;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
+.edit-input:focus {
+    border-style: solid;
+    box-shadow: 0 0 0 2px var(--primary);
+}
 
-        .edit-mode .info-value {
-            display: none;
-        }
+.edit-mode .info-value {
+    display: none;
+}
 
-        .edit-mode .edit-input {
-            display: block;
-        }
+.edit-mode .edit-input {
+    display: block;
+}
 
-        .edit-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-            background-size: 1.5em;
-            padding-right: 2.5rem;
-        }
+.edit-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.5em;
+    padding-right: 2.5rem;
+}
+
 /* Editable field styling */
 .info-value[contenteditable="true"] {
     background-color: var(--primary-light);
@@ -696,3 +699,182 @@ body {
     outline: none;
 }
 
+/* Edit Profile Card Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    display: none;
+    backdrop-filter: blur(3px);
+}
+
+.edit-profile-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 500px;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.edit-profile-card.active {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.edit-profile-card-header {
+    padding: 20px;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-profile-card-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile-card-header h3 i {
+    margin-right: 10px;
+}
+
+.close-edit-btn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.close-edit-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.edit-profile-card-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.edit-form-group {
+    margin-bottom: 20px;
+}
+
+.edit-form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.edit-form-input, .edit-form-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--white);
+}
+
+.edit-form-select {
+    padding: 12px 15px 12px 15px;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e74c3c'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    cursor: pointer;
+}
+
+.edit-form-input:focus, .edit-form-select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+.edit-profile-card-footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    border-top: 1px solid #eee;
+}
+
+.cancel-btn, .save-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cancel-btn {
+    background: #f1f1f1;
+    color: var(--dark);
+    border: 1px solid #ddd;
+}
+
+.save-btn {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+}
+
+.cancel-btn:hover {
+    background: #e5e5e5;
+}
+
+.save-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.save-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .edit-profile-card {
+        width: 95%;
+    }
+    
+    .edit-profile-card-body {
+        max-height: 70vh;
+    }
+    
+    .edit-profile-card-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cancel-btn, .save-btn {
+        width: 100%;
+    }
+}
