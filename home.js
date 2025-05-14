@@ -1,4 +1,4 @@
-// Simple animation for elements when they come into view
+// Көрініс кеңістігіне кірген элементтерге анимация
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.patient-card, .feature-card, .step');
 
@@ -13,18 +13,18 @@ const animateOnScroll = () => {
     });
 };
 
-// Set initial state for animated elements
+// Анимацияланған элементтердің бастапқы күйін орнату
 document.querySelectorAll('.patient-card, .feature-card, .step').forEach(element => {
     element.style.opacity = '0';
     element.style.transform = 'translateY(20px)';
     element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 });
 
-// Add event listeners
+// Оқиға тыңдаушыларын қосу
 window.addEventListener('load', animateOnScroll);
 window.addEventListener('scroll', animateOnScroll);
 
-// Footer navigation active state
+// Футер навигациясының белсенді күйі
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
@@ -32,7 +32,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
     });
 });
 
-// Smooth scrolling for anchor links
+// Anchor сілтемелері үшін жұмсақ скроллинг
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -49,35 +49,36 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const donateButtons = document.querySelectorAll('.donate-btn');
     const preloader = document.getElementById('preloader');
     const alertBox = document.getElementById('alert');
     const closeBtn = document.querySelector('.close-btn');
 
-    // Handle donation button clicks
+    // Қайырымдылық түймелеріне басу
     donateButtons.forEach(button => {
         button.addEventListener('click', function() {
             const patientName = this.getAttribute('data-patient');
 
-            // Show loading spinner
+            // Жүктеу индикаторын көрсету
             preloader.style.display = 'flex';
 
-            // Simulate processing (3 seconds)
+            // Өңдеуді симуляциялау (3 секунд)
             setTimeout(() => {
-                // Hide loading spinner
+                // Жүктеу индикаторын жасыру
                 preloader.style.display = 'none';
 
-                // Show success alert
-                alertBox.querySelector('.msg').textContent = `Thank you! We've notified ${patientName}'s medical team about your offer to help.`;
+                // Сәтті хабарламаны көрсету
+                alertBox.querySelector('.msg').textContent = `Рақмет! Біз ${patientName} дәрігерлер тобына сіздің көмек ұсынысыңыз туралы хабарладық.`;
                 alertBox.classList.add('show');
 
-                // Auto-hide after 5 seconds
+                // 5 секундтан соң автоматты жасыру
                 setTimeout(() => {
                     alertBox.classList.remove('show');
                     alertBox.classList.add('hide');
 
-                    // Reset for next use
+                    // Келесі пайдалану үшін қалпына келтіру
                     setTimeout(() => {
                         alertBox.classList.remove('hide');
                     }, 800);
@@ -86,12 +87,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close alert manually
+    // Хабарламаны қолмен жабу
     closeBtn.addEventListener('click', function() {
         alertBox.classList.remove('show');
         alertBox.classList.add('hide');
 
-        // Reset for next use
+        // Келесі пайдалану үшін қалпына келтіру
         setTimeout(() => {
             alertBox.classList.remove('hide');
         }, 800);
