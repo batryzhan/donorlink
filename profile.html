@@ -29,6 +29,7 @@
         <div class="profile-location">
             <i class='bx bx-map' aria-hidden="true"></i>
             <span id="profileLocation">City, Country</span>
+            <input type="text" class="edit-input" id="editLocation" placeholder="Enter city and country">
         </div>
     </header>
 
@@ -55,10 +56,12 @@
                 <div class="info-item">
                     <div class="info-label">Full Name</div>
                     <div class="info-value" id="fullName">User Name</div>
+                    <input type="text" class="edit-input" id="editFullName" placeholder="Enter full name">
                 </div>
                 <div class="info-item">
                     <div class="info-label">Date of Birth</div>
                     <div class="info-value" id="dob">Not set</div>
+                    <input type="date" class="edit-input" id="editDob">
                 </div>
                 <div class="info-item">
                     <div class="info-label">Email</div>
@@ -67,10 +70,18 @@
                 <div class="info-item">
                     <div class="info-label">Phone</div>
                     <div class="info-value" id="phone">Not set</div>
+                    <input type="tel" class="edit-input" id="editPhone" placeholder="Enter phone number">
                 </div>
                 <div class="info-item">
                     <div class="info-label">Gender</div>
                     <div class="info-value" id="gender">Not set</div>
+                    <select class="edit-input edit-select" id="editGender">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
                 </div>
             </div>
         </section>
@@ -82,10 +93,22 @@
                 <div class="info-item">
                     <div class="info-label">Blood Type</div>
                     <div class="info-value" id="bloodType">Not set</div>
+                    <select class="edit-input edit-select" id="editBloodType">
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
                 </div>
                 <div class="info-item">
                     <div class="info-label">Last Donation</div>
                     <div class="info-value" id="lastDonationDate">Never</div>
+                    <input type="date" class="edit-input" id="editLastDonation">
                 </div>
                 <div class="info-item">
                     <div class="info-label">Eligible to Donate</div>
@@ -94,6 +117,7 @@
                 <div class="info-item">
                     <div class="info-label">Health Conditions</div>
                     <div class="info-value" id="healthConditions">None reported</div>
+                    <textarea class="edit-input" id="editHealthConditions" placeholder="Describe health conditions"></textarea>
                 </div>
             </div>
 
@@ -106,9 +130,11 @@
                 </div>
             </div>
         </section>
+
         <button class="edit-profile-btn" id="editProfileBtn" aria-label="Edit profile">
             <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile
         </button>
+
         <nav class="footer-nav" aria-label="Main navigation">
             <a href="home.html" class="nav-item">
                 <i class='bx bx-home'></i>
@@ -132,10 +158,7 @@
             </a>
         </nav>
     </main>
-    <!-- This is the edit button near the bottom of the main content -->
-<button class="edit-profile-btn" id="editProfileBtn" aria-label="Edit profile">
-    <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile
-</button>
+
     <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="spinner"></div>
