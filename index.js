@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const sign_in_btn = document.querySelector("#sign-in-btn");
-    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const kiru_tuymesі = document.querySelector("#sign-in-btn");
+    const tirkelu_tuymesі = document.querySelector("#sign-up-btn");
     const container = document.querySelector(".container");
 
-    sign_up_btn.addEventListener("click", () => {
+    tirkelu_tuymesі.addEventListener("click", () => {
         container.classList.add("sign-up-mode");
     });
 
-    sign_in_btn.addEventListener("click", () => {
+    kiru_tuymesі.addEventListener("click", () => {
         container.classList.remove("sign-up-mode");
     });
 
@@ -16,23 +16,23 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             
             if (form.classList.contains('sign-up-form')) {
-                // Handle sign up
-                const fullNameInput = document.getElementById('fullName');
+                // Тіркеу формасын өңдеу
+                const atyZhoniInput = document.getElementById('fullName');
                 const emailInput = document.getElementById('signupEmail');
-                const passwordInput = document.getElementById('signupPassword');
+                const qupiyaSozInput = document.getElementById('signupPassword');
                 
                 if (!emailInput.value.includes('@')) {
-                    alert('Please enter a valid email address!');
+                    alert('Дұрыс электрондық пошта мекенжайын енгізіңіз!');
                     return;
                 }
 
-                if (passwordInput.value.length < 8) {
-                    alert('Password must be at least 8 characters!');
+                if (qupiyaSozInput.value.length < 8) {
+                    alert('Құпия сөз кемінде 8 таңбадан тұруы керек!');
                     return;
                 }
                 
-                // Save user data to localStorage
-                localStorage.setItem('userFullName', fullNameInput.value);
+                // Пайдаланушы деректерін сақтау
+                localStorage.setItem('userFullName', atyZhoniInput.value);
                 localStorage.setItem('userEmail', emailInput.value);
                 
                 document.body.classList.add('page-exit');
@@ -40,17 +40,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = 'home.html';
                 }, 500);
             } else {
-                // Handle sign in
+                // Кіру формасын өңдеу
                 const emailInput = document.getElementById('email');
-                const passwordInput = document.getElementById('password');
+                const qupiyaSozInput = document.getElementById('password');
                 
                 if (!emailInput.value.includes('@')) {
-                    alert('Please enter a valid email address!');
+                    alert('Дұрыс электрондық пошта мекенжайын енгізіңіз!');
                     return;
                 }
 
-                if (passwordInput.value.length < 8) {
-                    alert('Password must be at least 8 characters!');
+                if (qupiyaSozInput.value.length < 8) {
+                    alert('Құпия сөз кемінде 8 таңбадан тұруы керек!');
                     return;
                 }
                 
