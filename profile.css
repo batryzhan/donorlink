@@ -590,3 +590,56 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* Edit Button Styles */
+.edit-profile-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.edit-profile-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.edit-profile-btn:hover::before {
+    left: 100%;
+}
+
+.edit-profile-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+}
+
+.edit-profile-btn:active {
+    transform: translateY(0);
+}
+
+/* Editable field styling */
+.info-value[contenteditable="true"] {
+    background-color: var(--primary-light);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px dashed var(--primary);
+    outline: none;
+}
