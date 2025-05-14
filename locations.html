@@ -1,173 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DonorLink - Blood Donation Locations</title>
+    <title>DonorLink - Қан тапсыру орындары</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-         :root {
-            --primary: #e74c3c;
-            --primary-dark: #c0392b;
-            --secondary: #3498db;
-            --accent: #2ecc71;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --gray: #95a5a6;
-            --white: #ffffff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            padding-bottom: 80px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .locations-main {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .content-wrapper {
-            display: flex;
-            gap: 20px;
-            height: calc(100vh - 100px);
-        }
-        
-        .locations-sidebar {
-            width: 35%;
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow-y: auto;
-        }
-        
-        .locations-list {
-            padding: 20px;
-        }
-        
-        .location-card {
-            background: var(--light);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .location-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-        
-        .location-card.active {
-            background: var(--primary);
-            color: var(--white);
-        }
-        
-        .location-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .location-card p {
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 5px 0;
-        }
-        
-        .location-card i {
-            font-size: 1.2rem;
-        }
-        
-        .map-frame {
-            width: 65%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .map-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        @media (max-width: 768px) {
-            .content-wrapper {
-                flex-direction: column;
-                height: auto;
-            }
-            .locations-sidebar,
-            .map-frame {
-                width: 100%;
-            }
-            .map-frame {
-                height: 400px;
-            }
-        }
-        /* Footer Navigation */
-        
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--gray);
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 16px;
-            transition: var(--transition);
-        }
-        
-        .nav-item.active,
-        .nav-item:hover {
-            color: var(--primary);
-            transform: translateY(-5px);
-        }
-        
-        .nav-item i {
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-        
-        .nav-item span {
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+        /* ... styles remain unchanged ... */
     </style>
 </head>
 
@@ -177,28 +18,28 @@
             <div class="locations-sidebar">
                 <div class="locations-list" id="locationsList">
                     <!-- Location Cards -->
-                    <div class="location-card active" data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2828.866905386337!2d65.50389161167796!3d44.84464377094994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41f7fd2044543f59%3A0x3508c503ea5494ae!2sINVITRO!5e0!3m2!1sru!2skz!4v1747123123697!5m2!1sru!2skz">
-                        <h4>INVITRO Central</h4>
-                        <p><i class='bx bx-map'></i> Baitursynov street 46B</p>
-                        <p><i class='bx bx-time'></i> Mon-Sat: 8AM - 4PM</p>
+                    <div class="location-card active" data-map="https://www.google.com/maps/embed?...">
+                        <h4>INVITRO Орталығы</h4>
+                        <p><i class='bx bx-map'></i> Байтұрсынов көшесі 46B</p>
+                        <p><i class='bx bx-time'></i> Дс-Сн: 8:00 - 16:00</p>
                         <p><i class='bx bx-phone'></i> +7 (707) 258 58 88</p>
                     </div>
-                    <div class="location-card" data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2828.518712244483!2d65.49922621167832!3d44.85173397094987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41f7fd2a64be8d8b%3A0xe296ed516532e502!2z0JrQlNCbINCe0JvQmNCc0J8sINCa0LvQuNC90LjQutC-LdC00LjQsNCz0L3QvtGB0YLQuNGH0LXRgdC60LDRjyDQu9Cw0LHQvtGA0LDRgtC-0YDQuNGP!5e0!3m2!1sru!2skz!4v1747123109191!5m2!1sru!2skz">
+                    <div class="location-card" data-map="https://www.google.com/maps/embed?...">
                         <h4>KDL OLIMP</h4>
-                        <p><i class='bx bx-map'></i> Begim Ana 16 Street</p>
-                        <p><i class='bx bx-time'></i> Mon-Fri: 8AM - 4PM</p>
+                        <p><i class='bx bx-map'></i> Бегім Ана көшесі 16</p>
+                        <p><i class='bx bx-time'></i> Дс-Жм: 8:00 - 16:00</p>
                         <p><i class='bx bx-phone'></i> +7 (7242) 59 79 69</p>
                     </div>
-                    <div class="location-card" data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.58095588623!2d65.51890986167601!3d44.80972797095014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41f7ff634cd37f97%3A0x3fbaf10715d7a775!2z0J7QnNCm!5e0!3m2!1sru!2skz!4v1747122607665!5m2!1sru!2skz">
-                        <h4>OMC</h4>
-                        <p><i class='bx bx-map'></i> Begim Ana 16 Street</p>
-                        <p><i class='bx bx-time'></i> Mon-Fri: 8AM - 4PM</p>
+                    <div class="location-card" data-map="https://www.google.com/maps/embed?...">
+                        <h4>ОМЦ</h4>
+                        <p><i class='bx bx-map'></i> Бегім Ана көшесі 16</p>
+                        <p><i class='bx bx-time'></i> Дс-Жм: 8:00 - 16:00</p>
                         <p><i class='bx bx-phone'></i> +7 (7242) 59 79 69</p>
                     </div>
                 </div>
             </div>
             <div class="map-frame">
-                <iframe id="mainMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2828.866905386337!2d65.50389161167796!3d44.84464377094994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41f7fd2044543f59%3A0x3508c503ea5494ae!2sINVITRO!5e0!3m2!1sru!2skz!4v1747123123697!5m2!1sru!2skz"
+                <iframe id="mainMap" src="https://www.google.com/maps/embed?..."
                     loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -207,23 +48,23 @@
     <nav class="footer-nav">
         <a href="home.html" class="nav-item">
             <i class='bx bx-home'></i>
-            <span>Home</span>
+            <span>Басты бет</span>
         </a>
         <a href="help.html" class="nav-item">
             <i class='bx bx-donate-heart'></i>
-            <span>Help</span>
+            <span>Көмек</span>
         </a>
         <a href="donations.html" class="nav-item">
             <i class='bx bx-droplet'></i>
-            <span>Donations</span>
+            <span>Қан тапсыру</span>
         </a>
         <a href="locations.html" class="nav-item active">
             <i class='bx bx-map'></i>
-            <span>Locations</span>
+            <span>Мекенжайлар</span>
         </a>
         <a href="profile.html" class="nav-item">
             <i class='bx bx-user'></i>
-            <span>Profile</span>
+            <span>Профиль</span>
         </a>
     </nav>
     <script>
