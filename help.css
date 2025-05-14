@@ -1,0 +1,464 @@
+:root {
+    --primary: #e74c3c;
+    --primary-dark: #c0392b;
+    --secondary: #e74c3c;
+    --accent: #2ecc71;
+    --dark: #2c3e50;
+    --light: #ecf0f1;
+    --gray: #95a5a6;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    padding-bottom: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* Header Section */
+
+.help-header {
+    text-align: center;
+    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    margin-bottom: 3rem;
+    clip-path: ellipse(100% 60% at 50% 35%);
+}
+
+.help-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.help-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+
+/* Donation Section */
+
+.donation-section {
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+
+/* Donation Form */
+
+.donation-form {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+
+/* Custom Select with Bank Logos */
+
+.custom-select {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--gray);
+    font-size: 12px;
+}
+
+#payment-method {
+    width: 100%;
+    padding: 12px 15px 12px 50px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 25px;
+    transition: var(--transition);
+    cursor: pointer;
+    background-color: var(--white);
+}
+
+#payment-method:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+#payment-method option {
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px;
+    margin: 5px 0;
+}
+
+
+/* Amount Options */
+
+.amount-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.amount-btn {
+    flex: 1;
+    min-width: 80px;
+    background: var(--light);
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.amount-btn:hover,
+.amount-btn.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+
+/* Submit Button */
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.submit-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+}
+
+
+/* Footer Navigation */
+
+.footer-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--gray);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 16px;
+    transition: var(--transition);
+}
+
+.nav-item.active,
+.nav-item:hover {
+    color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.nav-item span {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+
+/* Preloader Styles */
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.preloader-text {
+    color: var(--dark);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Custom Alert Notification (smaller size) */
+
+.alert {
+    background: #ffdb9b;
+    padding: 15px 30px;
+    min-width: 350px;
+    position: fixed;
+    right: 0;
+    top: 10px;
+    border-radius: 4px;
+    border-left: 6px solid #ffa502;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.alert.showAlert {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.alert.show {
+    animation: show_slide 0.8s ease forwards;
+}
+
+@keyframes show_slide {
+    0% {
+        transform: translateX(100%);
+    }
+    40% {
+        transform: translateX(-5%);
+    }
+    80% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-5px);
+    }
+}
+
+.alert.hide {
+    animation: hide_slide 0.8s ease forwards;
+}
+
+@keyframes hide_slide {
+    0% {
+        transform: translateX(-5px);
+    }
+    40% {
+        transform: translateX(0%);
+    }
+    80% {
+        transform: translateX(-5%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.alert .fa-exclamation-circle {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ce8500;
+    font-size: 24px;
+}
+
+.alert .msg {
+    padding: 0 15px 0 35px;
+    font-size: 16px;
+    color: #ce8500;
+}
+
+.alert .close-btn {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffd080;
+    padding: 15px 15px;
+    cursor: pointer;
+}
+
+.alert .close-btn:hover {
+    background: #ffc766;
+}
+
+.alert .close-btn .fas {
+    color: #ce8500;
+    font-size: 18px;
+    line-height: 40px;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .help-header {
+        clip-path: ellipse(150% 60% at 50% 35%);
+        padding: 2rem 1rem;
+    }
+    .help-header h1 {
+        font-size: 2rem;
+    }
+    .amount-options {
+        flex-direction: column;
+    }
+    .amount-btn {
+        width: 100%;
+    }
+    .alert {
+        min-width: 280px;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-nav {
+        padding: 8px 0;
+    }
+    .nav-item {
+        padding: 6px 10px;
+    }
+    .nav-item i {
+        font-size: 1.3rem;
+    }
+    .nav-item span {
+        font-size: 0.7rem;
+    }
+    .alert {
+        min-width: 220px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    .alert .msg {
+        font-size: 14px;
+        padding: 0 10px 0 30px;
+    }
+    .alert .fa-exclamation-circle {
+        font-size: 20px;
+        left: 10px;
+    }
+    .alert .close-btn {
+        padding: 10px 12px;
+    }
+}
