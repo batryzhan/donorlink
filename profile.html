@@ -135,6 +135,72 @@
             <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile
         </button>
 
+        <!-- Edit Profile Modal Card -->
+        <div class="edit-profile-card" id="editProfileCard">
+            <div class="edit-profile-card-header">
+                <h3><i class='bx bx-edit-alt'></i> Edit Profile</h3>
+                <button class="close-edit-btn" id="closeEditBtn"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="edit-profile-card-body">
+                <div class="edit-form-group">
+                    <label for="editCardFullName">Full Name</label>
+                    <input type="text" id="editCardFullName" class="edit-form-input" placeholder="Enter your full name">
+                </div>
+                <div class="edit-form-group">
+                    <label for="editCardGender">Gender</label>
+                    <select id="editCardGender" class="edit-form-select">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                <div class="edit-form-group">
+                    <label for="editCardPhone">Phone Number</label>
+                    <input type="tel" id="editCardPhone" class="edit-form-input" placeholder="Enter your phone number">
+                </div>
+                <div class="edit-form-group">
+                    <label for="editCardDob">Date of Birth</label>
+                    <input type="date" id="editCardDob" class="edit-form-input">
+                </div>
+                <div class="edit-form-group">
+                    <label for="editCardBloodType">Blood Type</label>
+                    <select id="editCardBloodType" class="edit-form-select">
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="edit-form-group">
+                    <label for="editCardLocation">Location</label>
+                    <select id="editCardLocation" class="edit-form-select">
+                        <option value="">Select Location</option>
+                        <option value="New York, USA">New York, USA</option>
+                        <option value="London, UK">London, UK</option>
+                        <option value="Tokyo, Japan">Tokyo, Japan</option>
+                        <option value="Sydney, Australia">Sydney, Australia</option>
+                        <option value="Paris, France">Paris, France</option>
+                        <option value="Berlin, Germany">Berlin, Germany</option>
+                        <option value="Toronto, Canada">Toronto, Canada</option>
+                        <option value="Mumbai, India">Mumbai, India</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="edit-profile-card-footer">
+                <button class="cancel-btn" id="cancelEditBtn">Cancel</button>
+                <button class="save-btn" id="saveEditBtn">Save Changes</button>
+            </div>
+        </div>
+        <div class="overlay" id="overlay"></div>
+
         <nav class="footer-nav" aria-label="Main navigation">
             <a href="home.html" class="nav-item">
                 <i class='bx bx-home'></i>
