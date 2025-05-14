@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DonorLink - My Profile</title>
+    <meta name="description" content="View and manage your blood donor profile with DonorLink">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+    <header class="profile-header">
+        <div class="profile-image-container">
+            <button class="profile-image-button" id="profileImageButton" aria-label="Update profile picture">
+                <div class="profile-image-content">
+                    <i class='bx bx-user profile-image-icon' aria-hidden="true"></i>
+                    <div class="profile-image-overlay">
+                        <i class='bx bx-camera profile-image-camera-icon' aria-hidden="true"></i>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <h1 class="profile-name" id="profileName">Amanbek Batyrzhan</h1>
+        <div class="profile-blood-type" id="profileBloodType">O-</div>
+        <div class="profile-location">
+            <i class='bx bx-map' aria-hidden="true"></i>
+            <span id="profileLocation">Kyzylorda, Kazakhstan</span>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <section class="stats-container" aria-label="Donation statistics">
+            <div class="stat-card">
+                <div class="stat-number pulse" id="donationsCount">12</div>
+                <div class="stat-label">Donations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="livesSaved">24</div>
+                <div class="stat-label">Lives Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="lastDonation">2</div>
+                <div class="stat-label">Months Ago</div>
+            </div>
+        </section>
+
+        <!-- Personal Info Section -->
+        <section class="profile-card" aria-labelledby="personalInfoTitle">
+            <h2 class="card-title" id="personalInfoTitle"><i class='bx bx-user'></i> Personal Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value" id="fullName">Amambek Batyrzhan</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Date of Birth</div>
+                    <div class="info-value" id="dob">10 March 2010</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value" id="email">batyrpc@gmail.com</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value" id="phone">+7 705 545 58 77</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Gender</div>
+                    <div class="info-value" id="gender">Male</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Info Section -->
+        <section class="profile-card" aria-labelledby="healthInfoTitle">
+            <h2 class="card-title" id="healthInfoTitle"><i class='bx bx-heart'></i> Health Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Blood Type</div>
+                    <div class="info-value" id="bloodType">B-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Last Donation</div>
+                    <div class="info-value" id="lastDonationDate">2 months ago</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Eligible to Donate</div>
+                    <div class="info-value" id="eligible">Yes</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Health Conditions</div>
+                    <div class="info-value" id="healthConditions">None</div>
+                </div>
+            </div>
+
+            <!-- Achievements Section -->
+            <h3 class="achievements-title">Achievements</h3>
+            <div class="achievements">
+                <div class="achievement-badge">
+                    <i class='bx bxs-medal'></i>
+                    <span>First Time Donor</span>
+                </div>
+                <div class="achievement-badge">
+                    <i class='bx bxs-medal'></i>
+                    <span>Regular Donor</span>
+                </div>
+                <div class="achievement-badge">
+                    <i class='bx bxs-medal'></i>
+                    <span>10+ Donations</span>
+                </div>
+            </div>
+        </section>
+        <button class="edit-profile-btn" id="editProfileBtn" aria-label="Edit profile">
+            <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile
+        </button>
+        <nav class="footer-nav" aria-label="Main navigation">
+            <a href="home.html" class="nav-item">
+                <i class='bx bx-home'></i>
+                <span>Home</span>
+            </a>
+            <a href="help.html" class="nav-item">
+                <i class='bx bx-donate-heart'></i>
+                <span>Help</span>
+            </a>
+            <a href="donations.html" class="nav-item">
+                <i class='bx bx-droplet'></i>
+                <span>Donations</span>
+            </a>
+            <a href="locations.html" class="nav-item">
+                <i class='bx bx-map'></i>
+                <span>Locations</span>
+            </a>
+            <a href="profile.html" class="nav-item active" aria-current="page">
+                <i class='bx bx-user'></i>
+                <span>Profile</span>
+            </a>
+        </nav>
+    </main>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">Processing...</div>
+    </div>
+
+    <!-- Alert Notification -->
+    <div class="alert" id="alert">
+        <i class='bx bx-check-circle'></i>
+        <span class="msg">Thank you for offering to help!</span>
+        <div class="close-btn">
+            <i class='bx bx-x'></i>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>
