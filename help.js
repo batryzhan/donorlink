@@ -5,14 +5,14 @@ function selectAmount(amount) {
     event.target.classList.add('active');
 }
 
-// Update select with bank logos
+// Банк логотиптерімен select-ты жаңарту
 document.addEventListener('DOMContentLoaded', function() {
     const paymentSelect = document.getElementById('payment-method');
 
-    // Set initial logo
+    // Бастапқы логотипті орнату
     updateSelectLogo();
 
-    // Update on change
+    // Өзгерген кезде жаңарту
     paymentSelect.addEventListener('change', updateSelectLogo);
 
     function updateSelectLogo() {
@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Custom Alert Functions
+// Арнайы хабарлама функциялары
 function showAlert(message, type = 'warning') {
     const alert = document.querySelector('.alert');
     const msg = document.querySelector('.msg');
 
-    // Set message and adjust styles based on type
+    // Хабарламаны орнату және типіне қарай стильдерді реттеу
     msg.textContent = message;
 
     if (type === 'success') {
@@ -52,7 +52,7 @@ function showAlert(message, type = 'warning') {
         alert.querySelector('.close-btn').style.background = '#ff9999';
         alert.querySelector('.close-btn .fas').style.color = '#f44336';
     } else {
-        // Default warning style
+        // Әдепкі ескерту стилі
         alert.style.background = '#ffdb9b';
         alert.style.borderLeft = '6px solid #ffa502';
         alert.querySelector('.fa-exclamation-circle').style.color = '#ce8500';
@@ -71,48 +71,48 @@ function showAlert(message, type = 'warning') {
     }, 5000);
 }
 
-// Close button event
+// Жабу түймесінің оқиғасы
 document.querySelector('.close-btn').addEventListener('click', function() {
     document.querySelector('.alert').classList.remove("show");
     document.querySelector('.alert').classList.add("hide");
 });
 
-// Form submission with preloader
+// Форманы жіберу (preloader-мен)
 document.getElementById('donationForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Show preloader
+    // Preloader-ді көрсету
     const preloader = document.getElementById('preloader');
     preloader.style.display = 'flex';
 
-    // Disable submit button
+    // Жіберу түймесін өшіру
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
 
-    // Simulate processing delay (2 seconds)
+    // Өңдеу кідірісін симуляциялау (2 секунд)
     setTimeout(function() {
         const amount = document.getElementById('amount').value;
         const method = document.getElementById('payment-method').value;
         const name = document.getElementById('name').value;
 
-        // Hide preloader
+        // Preloader-ді жасыру
         preloader.style.display = 'none';
 
-        // Show success alert
-        showAlert(`Thank you, ${name}! Your donation of ${amount} ₸ via ${method} has been processed.`, 'success');
+        // Сәтті хабарламаны көрсету
+        showAlert(`Рақмет сізге, ${name}! Сіздің ${amount} ₸ сомасындағы қайырымдылығыңыз ${method} арқылы өңделді.`, 'success');
 
-        // Reset form
+        // Форманы қалпына келтіру
         document.getElementById('donationForm').reset();
 
-        // Reset active amount buttons
+        // Белсенді сома түймелерін қалпына келтіру
         document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
 
-        // Re-enable submit button
+        // Жіберу түймесін қосу
         submitBtn.disabled = false;
     }, 2000);
 });
 
-// Set active nav item
+// Белсенді навигация элементін орнату
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
