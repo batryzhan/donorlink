@@ -11,6 +11,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.close-btn');
     const profileImageButton = document.getElementById('profileImageButton');
     
+    // Profile elements
+    const profileName = document.getElementById('profileName');
+    const profileBloodType = document.getElementById('profileBloodType');
+    const profileLocation = document.getElementById('profileLocation');
+    const fullNameElement = document.getElementById('fullName');
+    const dobElement = document.getElementById('dob');
+    const emailElement = document.getElementById('email');
+    const phoneElement = document.getElementById('phone');
+    const genderElement = document.getElementById('gender');
+    const bloodTypeElement = document.getElementById('bloodType');
+    const lastDonationDateElement = document.getElementById('lastDonationDate');
+    const eligibleElement = document.getElementById('eligible');
+    const healthConditionsElement = document.getElementById('healthConditions');
+    
+    // Statistics elements
+    const donationsCountElement = document.getElementById('donationsCount');
+    const livesSavedElement = document.getElementById('livesSaved');
+    const lastDonationElement = document.getElementById('lastDonation');
+    
     // Form fields
     const formFields = {
         fullName: {
@@ -46,10 +65,139 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     
     function loadUserData() {
-        // Load data from localStorage
+        // Check if we have donor data from the donations form
+        const donorFullName = localStorage.getItem('donorFullName');
+        const donorAge = localStorage.getItem('donorAge');
+        const donorGender = localStorage.getItem('donorGender');
+        const donorFullBloodType = localStorage.getItem('donorFullBloodType');
+        const donorCity = localStorage.getItem('donorCity');
+        const donorContact = localStorage.getItem('donorContact');
+        const donorEligible = localStorage.getItem('donorEligible');
+        const lastDonationDate = localStorage.getItem('lastDonationDate');
+        const donationCount = localStorage.getItem('donationCount') || '0';
+        
+        // Update profile with donor data if available
+        if (donorFullName) {
+            profileName.textContent = donorFullName;
+            fullNameElement.textContent = donorFullName;
+            if (formFields.fullName.edit) formFields.fullName.edit.value = donorFullName;
+        }
+        
+        if (donorFullBloodType) {
+            profileBloodType.textContent = donorFullBloodType;
+            bloodTypeElement.textContent = donorFullBloodType;
+            if (formFields.bloodType.edit) {
+                // Find and select the matching option
+                const options = formFields.bloodType.edit.options;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value === donorFullBloodType) {
+                        formFields.bloodType.edit.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (donorCity) {
+            profileLocation.textContent = donorCity;
+            if (formFields.location.edit) {
+                // Try to find matching option or set to "Other"
+                const options = formFields.location.edit.options;
+                let found = false;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value === donorCity) {
+                        formFields.location.edit.selectedIndex = i;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found && options.length > 0) {
+                    // Set to "Other" if available
+                    for (let i = 0; i < options.length; i++) {
+                        if (options[i].value === "Other") {
+                            formFields.location.edit.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (donorGender) {
+            let displayGender = donorGender;
+            if (donorGender === 'male') displayGender = 'Ер';
+            else if (donorGender === 'female') displayGender = 'Әйел';
+            else if (donorGender === 'other') displayGender = 'Басқа';
+            
+            genderElement.textContent = displayGender;
+            
+            if (formFields.gender.edit) {
+                // Find and select the matching option
+                const options = formFields.gender.edit.options;
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value.toLowerCase() === donorGender) {
+                        formFields.gender.edit.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (donorContact) {
+            phoneElement.textContent = donorContact;
+            if (formFields.phone.edit) formFields.phone.edit.value = donorContact;
+        }
+        
+        if (donorAge) {
+            // Calculate approximate birth year based on age
+            const currentYear = new Date().getFullYear();
+            const birthYear = currentYear - parseInt(donorAge);
+            const approximateDob = `${birthYear}-01-01`;
+            
+            dobElement.textContent = approximateDob;
+            if (formFields.dob.edit) formFields.dob.edit.value = approximateDob;
+        }
+        
+        // Update eligibility status
+        if (donorEligible === 'true') {
+            eligibleElement.textContent = 'Жарамды';
+            eligibleElement.style.color = '#2ecc71';
+        } else if (donorEligible === 'false') {
+            eligibleElement.textContent = 'Жарамсыз';
+            eligibleElement.style.color = '#e74c3c';
+        }
+        
+        // Update last donation date
+        if (lastDonationDate) {
+            const donationDate = new Date(lastDonationDate);
+            const formattedDate = donationDate.toLocaleDateString('kk-KZ');
+            lastDonationDateElement.textContent = formattedDate;
+            
+            // Calculate months since last donation
+            const currentDate = new Date();
+            const monthsDiff = Math.floor((currentDate - donationDate) / (1000 * 60 * 60 * 24 * 30));
+            lastDonationElement.textContent = monthsDiff > 0 ? monthsDiff : 0;
+        }
+        
+        // Update donation statistics
+        if (donationCount) {
+            donationsCountElement.textContent = donationCount;
+            
+            // Calculate approximate lives saved (1 donation can help up to 3 people)
+            const livesSaved = parseInt(donationCount) * 3;
+            livesSavedElement.textContent = livesSaved;
+        }
+        
+        // Load profile image if exists
+        const savedImage = localStorage.getItem('profileImage');
+        if (savedImage) {
+            updateProfileImage(savedImage);
+        }
+        
+        // Load other saved data from localStorage (for fields not from donation form)
         Object.keys(formFields).forEach(key => {
             const savedValue = localStorage.getItem(key);
-            if (savedValue && formFields[key].display) {
+            if (savedValue && formFields[key].display && !formFields[key].display.textContent) {
                 formFields[key].display.textContent = savedValue;
                 
                 // Also set the form field value if it exists
@@ -70,43 +218,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-        
-        // Update profile name in header
-        const savedName = localStorage.getItem('fullName');
-        if (savedName) {
-            document.getElementById('profileName').textContent = savedName;
-        }
-        
-        // Update blood type in header
-        const savedBloodType = localStorage.getItem('bloodType');
-        if (savedBloodType) {
-            document.getElementById('profileBloodType').textContent = savedBloodType;
-        }
-        
-        // Load profile image
-        const savedImage = localStorage.getItem('profileImage');
-        if (savedImage) {
-            updateProfileImage(savedImage);
-        }
     }
     
     function setupEventListeners() {
         // Edit Profile Button - Open modal
-        editBtn.addEventListener('click', openEditProfileCard);
+        if (editBtn) {
+            editBtn.addEventListener('click', openEditProfileCard);
+        }
         
         // Close buttons
-        closeEditBtn.addEventListener('click', closeEditProfileCard);
-        cancelEditBtn.addEventListener('click', closeEditProfileCard);
-        overlay.addEventListener('click', closeEditProfileCard);
+        if (closeEditBtn) {
+            closeEditBtn.addEventListener('click', closeEditProfileCard);
+        }
+        
+        if (cancelEditBtn) {
+            cancelEditBtn.addEventListener('click', closeEditProfileCard);
+        }
+        
+        if (overlay) {
+            overlay.addEventListener('click', closeEditProfileCard);
+        }
         
         // Save button
-        saveEditBtn.addEventListener('click', saveProfileChanges);
+        if (saveEditBtn) {
+            saveEditBtn.addEventListener('click', saveProfileChanges);
+        }
         
         // Profile Image Upload
-        profileImageButton.addEventListener('click', handleProfileImageUpload);
+        if (profileImageButton) {
+            profileImageButton.addEventListener('click', handleProfileImageUpload);
+        }
         
         // Close Alert
-        closeBtn.addEventListener('click', hideAlert);
+        if (closeBtn) {
+            closeBtn.addEventListener('click', hideAlert);
+        }
     }
     
     function openEditProfileCard() {
@@ -149,10 +295,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             // Update profile name in header
-            document.getElementById('profileName').textContent = formFields.fullName.edit.value;
+            profileName.textContent = formFields.fullName.edit.value;
             
             // Update blood type in header
-            document.getElementById('profileBloodType').textContent = formFields.bloodType.edit.value;
+            profileBloodType.textContent = formFields.bloodType.edit.value;
+            
+            // Also update donor data in localStorage
+            localStorage.setItem('donorFullName', formFields.fullName.edit.value);
+            localStorage.setItem('donorFullBloodType', formFields.bloodType.edit.value);
+            localStorage.setItem('donorCity', formFields.location.edit.value);
             
             showAlert('Profile updated successfully!');
             closeEditProfileCard();
@@ -224,30 +375,38 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // UI Helpers
     function showPreloader(text) {
-        preloader.querySelector('.preloader-text').textContent = text || 'Loading...';
+        if (!preloader) return;
+        const preloaderText = preloader.querySelector('.preloader-text');
+        if (preloaderText) {
+            preloaderText.textContent = text || 'Loading...';
+        }
         preloader.style.display = 'flex';
     }
     
     function hidePreloader() {
-        preloader.style.display = 'none';
+        if (preloader) {
+            preloader.style.display = 'none';
+        }
     }
     
     function showAlert(message, type = 'success') {
+        if (!alertBox) return;
+        
         const msg = alertBox.querySelector('.msg');
         const icon = alertBox.querySelector('i');
         
-        msg.textContent = message;
+        if (msg) msg.textContent = message;
         
         if (type === 'error') {
             alertBox.style.background = '#f8d7da';
             alertBox.style.borderLeft = '6px solid #dc3545';
-            icon.className = 'bx bx-error-circle';
-            msg.style.color = '#721c24';
+            if (icon) icon.className = 'bx bx-error-circle';
+            if (msg) msg.style.color = '#721c24';
         } else {
             alertBox.style.background = '#d4edda';
             alertBox.style.borderLeft = '6px solid #28a745';
-            icon.className = 'bx bx-check-circle';
-            msg.style.color = '#155724';
+            if (icon) icon.className = 'bx bx-check-circle';
+            if (msg) msg.style.color = '#155724';
         }
         
         alertBox.classList.add('show');
@@ -259,6 +418,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function hideAlert() {
+        if (!alertBox) return;
+        
         alertBox.classList.remove('show');
         alertBox.classList.add('hide');
         
@@ -266,4 +427,52 @@ document.addEventListener('DOMContentLoaded', () => {
             alertBox.classList.remove('hide');
         }, 800);
     }
+    
+    // Add achievement badges based on donation count
+    function updateAchievements() {
+        const donationCount = parseInt(localStorage.getItem('donationCount') || '0');
+        const achievementsContainer = document.querySelector('.achievements');
+        
+        if (!achievementsContainer) return;
+        
+        // Clear existing achievements
+        achievementsContainer.innerHTML = '';
+        
+        // First-time donor badge (always show if donated at least once)
+        if (donationCount >= 1) {
+            const firstTimeBadge = document.createElement('div');
+            firstTimeBadge.className = 'achievement-badge';
+            firstTimeBadge.innerHTML = '<i class="bx bxs-medal"></i><span>Алғашқы рет донор болған</span>';
+            achievementsContainer.appendChild(firstTimeBadge);
+        }
+        
+        // Regular donor badge (3+ donations)
+        if (donationCount >= 3) {
+            const regularBadge = document.createElement('div');
+            regularBadge.className = 'achievement-badge';
+            regularBadge.innerHTML = '<i class="bx bxs-trophy"></i><span>Тұрақты донор</span>';
+            achievementsContainer.appendChild(regularBadge);
+        }
+        
+        // Hero donor badge (5+ donations)
+        if (donationCount >= 5) {
+            const heroBadge = document.createElement('div');
+            heroBadge.className = 'achievement-badge';
+            heroBadge.innerHTML = '<i class="bx bxs-heart"></i><span>Қаһарман донор</span>';
+            achievementsContainer.appendChild(heroBadge);
+        }
+        
+        // Lifesaver badge (10+ donations)
+        if (donationCount >= 10) {
+            const lifesaverBadge = document.createElement('div');
+            lifesaverBadge.className = 'achievement-badge';
+            lifesaverBadge.style.background = '#fef3c7';
+            lifesaverBadge.style.color = '#92400e';
+            lifesaverBadge.innerHTML = '<i class="bx bxs-star"></i><span>Өмір құтқарушы</span>';
+            achievementsContainer.appendChild(lifesaverBadge);
+        }
+    }
+    
+    // Call this function to update achievements
+    updateAchievements();
 });
