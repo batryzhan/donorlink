@@ -956,6 +956,134 @@ select:focus {
     font-size: 16px;
     color: #ce8500;
 }
+/* Recommendations */
+.recommendations {
+    background-color: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    border-left: 4px solid var(--primary);
+}
+
+.recommendations h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray-800);
+}
+
+.recommendations ul {
+    padding-left: 1.25rem;
+}
+
+.recommendations li {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray-700);
+}
+
+/* Eligibility Test */
+.eligibility-test {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.eligibility-test h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+    color: var(--gray-800);
+    text-align: center;
+}
+
+.test-question {
+    margin-bottom: 1rem;
+}
+
+.test-question p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.test-answers {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.test-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    flex: 1;
+    max-width: 120px;
+}
+
+.yes-btn {
+    background-color: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+.yes-btn:hover {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.no-btn {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.no-btn:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.test-result {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+}
+
+.test-result.eligible {
+    background-color: rgba(72, 187, 120, 0.1);
+    border: 1px solid var(--accent);
+}
+
+.test-result.not-eligible {
+    background-color: rgba(229, 62, 62, 0.1);
+    border: 1px solid var(--primary);
+}
+
+.result-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.result-icon.not-eligible {
+    color: var(--primary);
+}
+
+.result-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.result-text {
+    margin-bottom: 1.25rem;
+}
+
+.hidden {
+    display: none;
+}
 
 .alert .close-btn {
     position: absolute;
