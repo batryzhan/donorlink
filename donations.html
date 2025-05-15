@@ -109,13 +109,54 @@
                     </button>
                 </form>
             </section>
+            <!-- Donation Recommendations -->
+<div class="recommendations">
+    <h3>Қан тапсыруға дайындық</h3>
+    <ul>
+        <li>Қан тапсырғанға дейін 8 сағат бойы ұйықтаңыз</li>
+        <li>Тапсырмас бұрын жеңіл тамақтанғыз</li>
+        <li>Алкогольді қабылдамаңыз (48 сағат бұрын)</li>
+        <li>Дәрі-дәрмектерді қабылдағаныңызды айтыңыз</li>
+    </ul>
+</div>
 
-            <!-- Other sections remain the same -->
+<!-- Eligibility Test -->
+<div class="eligibility-test">
+    <h3>Сіз донор бола аласыз ба?</h3>
+    <div class="test-question" id="question1">
+        <p>Сіздің салмағыңыз 50 кг-нан көп пе?</p>
+        <div class="test-answers">
+            <button class="test-btn yes-btn" onclick="nextQuestion(1, true)">Иә</button>
+            <button class="test-btn no-btn" onclick="showResult(false)">Жоқ</button>
+        </div>
+    </div>
+    
+    <div class="test-question hidden" id="question2">
+        <p>Соңғы 6 айда операция жасатқыз ба?</p>
+        <div class="test-answers">
+            <button class="test-btn yes-btn" onclick="showResult(false)">Иә</button>
+            <button class="test-btn no-btn" onclick="nextQuestion(2, false)">Жоқ</button>
+        </div>
+    </div>
+    
+    <div class="test-question hidden" id="question3">
+        <p>Сізде созылмалы аурулар бар ма?</p>
+        <div class="test-answers">
+            <button class="test-btn yes-btn" onclick="showResult(false)">Иә</button>
+            <button class="test-btn no-btn" onclick="nextQuestion(3, false)">Жоқ</button>
+        </div>
+    </div>
+    
+    <div class="test-result hidden" id="testResult">
+        <div class="result-icon">
+            <i class='bx' id="resultIcon"></i>
+        </div>
+        <h4 id="resultTitle"></h4>
+        <p id="resultText"></p>
+        <button class="btn btn-primary" onclick="resetTest()">Қайта бастау</button>
+    </div>
+</div>
         </main>
-
-        <nav class="app-nav" role="navigation" aria-label="Басты навигация">
-            <!-- Navigation items remain the same with improved aria-labels -->
-        </nav>
     </div>
     <nav class="footer-nav">
         <a href="home.html" class="nav-item">
