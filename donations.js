@@ -72,6 +72,30 @@ function validateForm(formData) {
     return { isValid, errorMessage };
 }
 
+// Save donor data to localStorage
+function saveDonorData(formData) {
+    // Save each field individually
+    localStorage.setItem('donorFullName', formData.fullName);
+    localStorage.setItem('donorAge', formData.age);
+    localStorage.setItem('donorGender', formData.gender);
+    localStorage.setItem('donorBloodType', formData.bloodType);
+    localStorage.setItem('donorRhFactor', formData.rhFactor);
+    localStorage.setItem('donorCity', formData.city);
+    localStorage.setItem('donorContact', formData.contact);
+    
+    // Save the complete blood type (with Rh factor)
+    const fullBloodType = `${formData.bloodType}${formData.rhFactor === 'positive' ? '+' : '-'}`;
+    localStorage.setItem('donorFullBloodType', fullBloodType);
+    
+    // Save donation date
+    const currentDate = new Date();
+    localStorage.setItem('lastDonationDate', currentDate.toISOString());
+    
+    // Increment donation count
+    const donationCount = parseInt(localStorage.getItem('donationCount') || '0');
+    localStorage.setItem('donationCount', donationCount + 1);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Donor Form Submission
     const donorForm = document.getElementById("donorInfoForm");
@@ -106,6 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 // Hide preloader
                 preloader.style.display = 'none';
+
+                // Save donor data to localStorage
+                saveDonorData(formData);
 
                 console.log("Form Data:", formData);
 
@@ -170,11 +197,17 @@ function showResult(isEligible) {
         resultIcon.className = 'bx bx-check-circle';
         resultTitle.textContent = 'Құттықтаймыз!';
         resultText.textContent = 'Сіз қан доноры бола аласыз! Бізбен бірге өмір сыйлаңыз.';
+        
+        // Save eligibility status to localStorage
+        localStorage.setItem('donorEligible', 'true');
     } else {
         resultDiv.className = 'test-result not-eligible';
         resultIcon.className = 'bx bx-x-circle';
         resultTitle.textContent = 'Өкінішке орай...';
         resultText.textContent = 'Қазіргі уақытта сіз қан тапсыра алмайсыз. Дәрігерге қаралыңыз.';
+        
+        // Save eligibility status to localStorage
+        localStorage.setItem('donorEligible', 'false');
     }
 
     resultDiv.classList.remove('hidden');
