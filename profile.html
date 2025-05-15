@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DonorLink - My Profile</title>
-    <meta name="description" content="View and manage your blood donor profile with DonorLink">
+    <meta name="description" content="DonorLink көмегімен донорлық профиліңізді қараңыз және басқарыңыз">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -24,63 +24,63 @@
                 </div>
             </button>
         </div>
-        <h1 class="profile-name" id="profileName">User Name</h1>
+       <h1 class="profile-name" id="profileName">Пайдаланушының Аты</h1>
         <div class="profile-blood-type" id="profileBloodType">O-</div>
         <div class="profile-location">
             <i class='bx bx-map' aria-hidden="true"></i>
-            <span id="profileLocation">City, Country</span>
-            <input type="text" class="edit-input" id="editLocation" placeholder="Enter city and country">
+            <span id="profileLocation">Қала, Ел</span>
+            <input type="text" class="edit-input" id="editLocation" placeholder="Қала мен елді енгізіңіз">
         </div>
     </header>
 
     <main class="profile-container">
-        <section class="stats-container" aria-label="Donation statistics">
+        <section class="stats-container" aria-label="Донорлық статистика">
             <div class="stat-card">
                 <div class="stat-number pulse" id="donationsCount">0</div>
-                <div class="stat-label">Donations</div>
+                <div class="stat-label">Донор болу саны</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="livesSaved">0</div>
-                <div class="stat-label">Lives Saved</div>
+                <div class="stat-label">Құтқарылған өмірлер</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="lastDonation">-</div>
-                <div class="stat-label">Months Ago</div>
+                <div class="stat-label">Ай бұрын</div>
             </div>
         </section>
 
         <!-- Personal Info Section -->
         <section class="profile-card" aria-labelledby="personalInfoTitle">
-            <h2 class="card-title" id="personalInfoTitle"><i class='bx bx-user'></i> Personal Information</h2>
+            <h2 class="card-title" id="personalInfoTitle"><i class='bx bx-user'></i> Жеке ақпарат</h2>
             <div class="info-grid">
                 <div class="info-item">
-                    <div class="info-label">Full Name</div>
-                    <div class="info-value" id="fullName">User Name</div>
-                    <input type="text" class="edit-input" id="editFullName" placeholder="Enter full name">
+                    <div class="info-label">Толық аты</div>
+                    <div class="info-value" id="fullName">Пайдаланушының Аты</div>
+                    <input type="text" class="edit-input" id="editFullName" placeholder="Толық атыңызды енгізіңіз">
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Date of Birth</div>
-                    <div class="info-value" id="dob">Not set</div>
+                    <div class="info-label">Туған күні</div>
+                    <div class="info-value" id="dob">Көрсетілмеген</div>
                     <input type="date" class="edit-input" id="editDob">
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Email</div>
+                    <div class="info-label">Электрондық пошта</div>
                     <div class="info-value" id="email">user@example.com</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Phone</div>
-                    <div class="info-value" id="phone">Not set</div>
-                    <input type="tel" class="edit-input" id="editPhone" placeholder="Enter phone number">
+                    <div class="info-label">Телефон</div>
+                    <div class="info-value" id="phone">Көрсетілмеген</div>
+                    <input type="tel" class="edit-input" id="editPhone" placeholder="Телефон нөмірін енгізіңіз">
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Gender</div>
-                    <div class="info-value" id="gender">Not set</div>
+                    <div class="info-label">Жынысы</div>
+                    <div class="info-value" id="gender">Көрсетілмеген</div>
                     <select class="edit-input edit-select" id="editGender">
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
+                        <option value="">Жынысты таңдаңыз</option>
+                        <option value="Male">Ер</option>
+                        <option value="Female">Әйел</option>
+                        <option value="Other">Басқа</option>
+                        <option value="Prefer not to say">Көрсетпеу</option>
                     </select>
                 </div>
             </div>
@@ -88,13 +88,13 @@
 
         <!-- Health Info Section -->
         <section class="profile-card" aria-labelledby="healthInfoTitle">
-            <h2 class="card-title" id="healthInfoTitle"><i class='bx bx-heart'></i> Health Information</h2>
+            <h2 class="card-title" id="healthInfoTitle"><i class='bx bx-heart'></i> Денсаулық жағдайы</h2>
             <div class="info-grid">
                 <div class="info-item">
-                    <div class="info-label">Blood Type</div>
-                    <div class="info-value" id="bloodType">Not set</div>
+                    <div class="info-label">Қан тобы</div>
+                    <div class="info-value" id="bloodType">Көрсетілмеген</div>
                     <select class="edit-input edit-select" id="editBloodType">
-                        <option value="">Select Blood Type</option>
+                        <option value="">Қан тобын таңдаңыз</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
@@ -106,50 +106,49 @@
                     </select>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Last Donation</div>
-                    <div class="info-value" id="lastDonationDate">Never</div>
+                    <div class="info-label">Соңғы донорлық</div>
+                    <div class="info-value" id="lastDonationDate">Болмаған</div>
                     <input type="date" class="edit-input" id="editLastDonation">
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Eligible to Donate</div>
-                    <div class="info-value" id="eligible">Unknown</div>
+                    <div class="info-label">Донор болуға жарамдылығы</div>
+                    <div class="info-value" id="eligible">Белгісіз</div>
                 </div>
                 <div class="info-item">
-                    <div class="info-label">Health Conditions</div>
-                    <div class="info-value" id="healthConditions">None reported</div>
-                    <textarea class="edit-input" id="editHealthConditions" placeholder="Describe health conditions"></textarea>
+                    <div class="info-label">Денсаулық жағдайы</div>
+                    <div class="info-value" id="healthConditions">Ешқандай мәлімет жоқ</div>
+                    <textarea class="edit-input" id="editHealthConditions" placeholder="Денсаулық жағдайын сипаттаңыз"></textarea>
                 </div>
             </div>
 
-            <!-- Achievements Section -->
-            <h3 class="achievements-title">Achievements</h3>
+            <h3 class="achievements-title">Жетістіктер</h3>
             <div class="achievements">
                 <div class="achievement-badge">
                     <i class='bx bxs-medal'></i>
-                    <span>First Time Donor</span>
+                    <span>Алғашқы рет донор болған</span>
                 </div>
             </div>
         </section>
 
-        <button class="edit-profile-btn" id="editProfileBtn" aria-label="Edit profile">
-            <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Edit Profile
+        <button class="edit-profile-btn" id="editProfileBtn" aria-label="Профильді өңдеу">
+            <i class='bx bx-edit-alt' style="margin-right: 8px;"></i> Профильді өңдеу
         </button>
 
         <!-- Edit Profile Modal Card -->
         <div class="edit-profile-card" id="editProfileCard">
             <div class="edit-profile-card-header">
-                <h3><i class='bx bx-edit-alt'></i> Edit Profile</h3>
+                <h3><i class='bx bx-edit-alt'></i> Профильді өзгерту</h3>
                 <button class="close-edit-btn" id="closeEditBtn"><i class='bx bx-x'></i></button>
             </div>
             <div class="edit-profile-card-body">
                 <div class="edit-form-group">
-                    <label for="editCardFullName">Full Name</label>
-                    <input type="text" id="editCardFullName" class="edit-form-input" placeholder="Enter your full name">
+                    <label for="editCardFullName">Толық аты</label>
+                    <input type="text" id="editCardFullName" class="edit-form-input" placeholder="Толық атыңызды енгізіңіз">
                 </div>
                 <div class="edit-form-group">
-                    <label for="editCardGender">Gender</label>
+                    <label for="editCardGender">Жынысы</label>
                     <select id="editCardGender" class="edit-form-select">
-                        <option value="">Select Gender</option>
+                        <option value="">Жынысты таңдаңыз</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
@@ -157,17 +156,16 @@
                     </select>
                 </div>
                 <div class="edit-form-group">
-                    <label for="editCardPhone">Phone Number</label>
-                    <input type="tel" id="editCardPhone" class="edit-form-input" placeholder="Enter your phone number">
+                    <label for="editCardPhone">Телефон нөмірі</label>
+                    <input type="tel" id="editCardPhone" class="edit-form-input" placeholder="Телефон нөмірін енгізіңіз">
                 </div>
                 <div class="edit-form-group">
-                    <label for="editCardDob">Date of Birth</label>
+                    <label for="editCardDob">Туған күні</label>
                     <input type="date" id="editCardDob" class="edit-form-input">
                 </div>
                 <div class="edit-form-group">
-                    <label for="editCardBloodType">Blood Type</label>
+                    <label for="editCardBloodType">Қан тобы</label>
                     <select id="editCardBloodType" class="edit-form-select">
-                        <option value="">Select Blood Type</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
@@ -201,40 +199,38 @@
         </div>
         <div class="overlay" id="overlay"></div>
 
-        <nav class="footer-nav" aria-label="Main navigation">
+        <nav class="footer-nav" aria-label="Негізгі навигация">
             <a href="home.html" class="nav-item">
                 <i class='bx bx-home'></i>
-                <span>Home</span>
+                <span>Басты бет</span>
             </a>
             <a href="help.html" class="nav-item">
                 <i class='bx bx-donate-heart'></i>
-                <span>Help</span>
+                <span>Көмек</span>
             </a>
             <a href="donations.html" class="nav-item">
                 <i class='bx bx-droplet'></i>
-                <span>Donations</span>
+                <span>Донорлық</span>
             </a>
             <a href="locations.html" class="nav-item">
                 <i class='bx bx-map'></i>
-                <span>Locations</span>
+                <span>Мекенжайлар</span>
             </a>
             <a href="profile.html" class="nav-item active" aria-current="page">
                 <i class='bx bx-user'></i>
-                <span>Profile</span>
+                <span>Профиль</span>
             </a>
         </nav>
     </main>
 
-    <!-- Preloader -->
     <div class="preloader" id="preloader">
         <div class="spinner"></div>
-        <div class="preloader-text">Processing...</div>
+        <div class="preloader-text">Өңделуде...</div>
     </div>
 
-    <!-- Alert Notification -->
     <div class="alert" id="alert">
         <i class='bx bx-check-circle'></i>
-        <span class="msg">Thank you for offering to help!</span>
+        <span class="msg">Көмек көрсетуге ниет білдіргеніңіз үшін рахмет!</span>
         <div class="close-btn">
             <i class='bx bx-x'></i>
         </div>
