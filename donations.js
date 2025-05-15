@@ -79,5 +79,49 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Other existing JavaScript code...
+    // Eligibility Test Functions
+function nextQuestion(currentQ, isYes) {
+    document.getElementById(`question${currentQ}`).classList.add('hidden');
+    document.getElementById(`question${currentQ + 1}`).classList.remove('hidden');
+}
+
+function showResult(isEligible) {
+    const resultDiv = document.getElementById('testResult');
+    const resultIcon = document.getElementById('resultIcon');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+    
+    // Hide all questions
+    document.querySelectorAll('.test-question').forEach(q => {
+        q.classList.add('hidden');
+    });
+    
+    if (isEligible) {
+        resultDiv.className = 'test-result eligible';
+        resultIcon.className = 'bx bx-check-circle';
+        resultIcon.style.color = 'var(--accent)';
+        resultTitle.textContent = 'Құттықтаймыз!';
+        resultText.textContent = 'Сіз қан доноры бола аласыз! Бізбен бірге өмір сыйлаңыз.';
+    } else {
+        resultDiv.className = 'test-result not-eligible';
+        resultIcon.className = 'bx bx-x-circle';
+        resultIcon.style.color = 'var(--primary)';
+        resultTitle.textContent = 'Өкінішке орай...';
+        resultText.textContent = 'Қазіргі уақытта сіз қан тапсыра алмайсыз. Дәрігерге қаралыңыз.';
+    }
+    
+    resultDiv.classList.remove('hidden');
+}
+
+function resetTest() {
+    // Hide result and all questions except first
+    document.getElementById('testResult').classList.add('hidden');
+    document.querySelectorAll('.test-question').forEach((q, index) => {
+        if (index === 0) {
+            q.classList.remove('hidden');
+        } else {
+            q.classList.add('hidden');
+        }
+    });
+}
 });
