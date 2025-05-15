@@ -41,12 +41,62 @@ function hideAlert() {
     }, 800);
 }
 
+// Form validation function
+function validateForm(formData) {
+    let isValid = true;
+    let errorMessage = '';
+
+    if (!formData.fullName || formData.fullName.trim() === '') {
+        isValid = false;
+        errorMessage = 'Толық аты-жөні енгізіңіз';
+    } else if (!formData.age || formData.age < 18 || formData.age > 65) {
+        isValid = false;
+        errorMessage = 'Жасыңыз 18-65 аралығында болуы керек';
+    } else if (!formData.gender) {
+        isValid = false;
+        errorMessage = 'Жынысыңызды таңдаңыз';
+    } else if (!formData.bloodType) {
+        isValid = false;
+        errorMessage = 'Қан тобын таңдаңыз';
+    } else if (!formData.rhFactor) {
+        isValid = false;
+        errorMessage = 'Rh факторын таңдаңыз';
+    } else if (!formData.city || formData.city.trim() === '') {
+        isValid = false;
+        errorMessage = 'Қала/Аймақ енгізіңіз';
+    } else if (!formData.contact || formData.contact.trim() === '') {
+        isValid = false;
+        errorMessage = 'Байланыс ақпаратын енгізіңіз';
+    }
+
+    return { isValid, errorMessage };
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     // Donor Form Submission
     const donorForm = document.getElementById("donorInfoForm");
     if (donorForm) {
         donorForm.addEventListener("submit", (e) => {
             e.preventDefault();
+
+            // Get form data
+            const formData = {
+                fullName: document.getElementById("fullName").value,
+                age: document.getElementById("age").value,
+                gender: document.getElementById("gender").value,
+                bloodType: document.getElementById("bloodType").value,
+                rhFactor: document.getElementById("rhFactor").value,
+                city: document.getElementById("city").value,
+                contact: document.getElementById("contact").value,
+            };
+
+            // Validate form
+            const { isValid, errorMessage } = validateForm(formData);
+
+            if (!isValid) {
+                showAlert(errorMessage, 'error');
+                return;
+            }
 
             // Show preloader
             const preloader = document.getElementById('preloader');
@@ -57,60 +107,82 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Hide preloader
                 preloader.style.display = 'none';
 
-                // Get form data
-                const formData = {
-                    fullName: document.getElementById("fullName").value,
-                    age: document.getElementById("age").value,
-                    gender: document.getElementById("gender").value,
-                    bloodType: document.getElementById("bloodType").value,
-                    rhFactor: document.getElementById("rhFactor").value,
-                    city: document.getElementById("city").value,
-                    contact: document.getElementById("contact").value,
-                };
-
                 console.log("Form Data:", formData);
 
                 // Show success alert
                 showAlert("Мәліметтер сәтті сақталды!", 'success');
 
-                // Reset form (optional)
-                // donorForm.reset();
-            }, 2000); // 2 seconds delay for simulation
+                // Scroll to recommendations section
+                const recommendationsSection = document.querySelector('.recommendations-card');
+                if (recommendationsSection) {
+                    recommendationsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 1500); // 1.5 seconds delay for simulation
         });
     }
 
-    // Eligibility Test Functions
+    // Add animation to recommendation items
+    const recommendationItems = document.querySelectorAll('.recommendation-item');
+    if (recommendationItems.length > 0) {
+        recommendationItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                item.style.transition = 'all 0.5s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 100 * (index + 1));
+        });
+    }
+});
+
+// Eligibility Test Functions
 function nextQuestion(currentQ, isYes) {
     document.getElementById(`question${currentQ}`).classList.add('hidden');
     document.getElementById(`question${currentQ + 1}`).classList.remove('hidden');
+
+    // Add fade-in animation
+    const nextQuestion = document.getElementById(`question${currentQ + 1}`);
+    nextQuestion.style.opacity = '0';
+    nextQuestion.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+        nextQuestion.style.transition = 'all 0.5s ease';
+        nextQuestion.style.opacity = '1';
+        nextQuestion.style.transform = 'translateY(0)';
+    }, 50);
 }
 
 function showResult(isEligible) {
-    const resultDiv = document.getElementById('testResult');
-    const resultIcon = document.getElementById('resultIcon');
-    const resultTitle = document.getElementById('resultTitle');
-    const resultText = document.getElementById('resultText');
-    
     // Hide all questions
     document.querySelectorAll('.test-question').forEach(q => {
         q.classList.add('hidden');
     });
-    
+
+    const resultDiv = document.getElementById('testResult');
+    const resultIcon = document.getElementById('resultIcon');
+    const resultTitle = document.getElementById('resultTitle');
+    const resultText = document.getElementById('resultText');
+
     if (isEligible) {
         resultDiv.className = 'test-result eligible';
         resultIcon.className = 'bx bx-check-circle';
-        resultIcon.style.color = 'var(--accent)';
         resultTitle.textContent = 'Құттықтаймыз!';
         resultText.textContent = 'Сіз қан доноры бола аласыз! Бізбен бірге өмір сыйлаңыз.';
     } else {
         resultDiv.className = 'test-result not-eligible';
         resultIcon.className = 'bx bx-x-circle';
-        resultIcon.style.color = 'var(--primary)';
         resultTitle.textContent = 'Өкінішке орай...';
         resultText.textContent = 'Қазіргі уақытта сіз қан тапсыра алмайсыз. Дәрігерге қаралыңыз.';
     }
-    
+
     resultDiv.classList.remove('hidden');
+
+    // Scroll to result
+    setTimeout(() => {
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
 }
 
 function resetTest() {
@@ -119,9 +191,23 @@ function resetTest() {
     document.querySelectorAll('.test-question').forEach((q, index) => {
         if (index === 0) {
             q.classList.remove('hidden');
+
+            // Add fade-in animation
+            q.style.opacity = '0';
+            q.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                q.style.transition = 'all 0.5s ease';
+                q.style.opacity = '1';
+                q.style.transform = 'translateY(0)';
+            }, 50);
         } else {
             q.classList.add('hidden');
         }
     });
 }
-});
+
+// Make these functions globally available
+window.nextQuestion = nextQuestion;
+window.showResult = showResult;
+window.resetTest = resetTest;
