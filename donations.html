@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="donations.css">
     <!-- Preload critical resources -->
     <link rel="preload" href="https://images.unsplash.com/photo-1615461066841-6116e61058f4" as="image">
-
 </head>
 
 <body>
@@ -109,55 +108,110 @@
                     </button>
                 </form>
             </section>
-            <!-- Donation Recommendations -->
-<div class="recommendations">
-    <h3>Қан тапсыруға дайындық</h3>
-    <ul>
-        <li>Қан тапсырғанға дейін 8 сағат бойы ұйықтаңыз</li>
-        <li>Тапсырмас бұрын жеңіл тамақтанғыз</li>
-        <li>Алкогольді қабылдамаңыз (48 сағат бұрын)</li>
-        <li>Дәрі-дәрмектерді қабылдағаныңызды айтыңыз</li>
-    </ul>
-</div>
 
-<!-- Eligibility Test -->
-<div class="eligibility-test">
-    <h3>Сіз донор бола аласыз ба?</h3>
-    <div class="test-question" id="question1">
-        <p>Сіздің салмағыңыз 50 кг-нан көп пе?</p>
-        <div class="test-answers">
-            <button class="test-btn yes-btn" onclick="nextQuestion(1, true)">Иә</button>
-            <button class="test-btn no-btn" onclick="showResult(false)">Жоқ</button>
-        </div>
-    </div>
-    
-    <div class="test-question hidden" id="question2">
-        <p>Соңғы 6 айда операция жасатқыз ба?</p>
-        <div class="test-answers">
-            <button class="test-btn yes-btn" onclick="showResult(false)">Иә</button>
-            <button class="test-btn no-btn" onclick="nextQuestion(2, false)">Жоқ</button>
-        </div>
-    </div>
-    
-    <div class="test-question hidden" id="question3">
-        <p>Сізде созылмалы аурулар бар ма?</p>
-        <div class="test-answers">
-            <button class="test-btn yes-btn" onclick="showResult(false)">Иә</button>
-            <button class="test-btn no-btn" onclick="nextQuestion(3, false)">Жоқ</button>
-        </div>
-    </div>
-    
-    <div class="test-result hidden" id="testResult">
-        <div class="result-icon">
-            <i class='bx' id="resultIcon"></i>
-        </div>
-        <h4 id="resultTitle"></h4>
-        <p id="resultText"></p>
-        <button class="btn btn-primary" onclick="resetTest()">Қайта бастау</button>
-    </div>
-</div>
+            <!-- Donation Recommendations -->
+            <section class="recommendations-card">
+                <div class="recommendations-header">
+                    <i class='bx bx-bulb'></i>
+                    <h3>Қан тапсыруға дайындық</h3>
+                </div>
+                <div class="recommendations-body">
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class='bx bx-bed'></i>
+                        </div>
+                        <div class="recommendation-text">
+                            Қан тапсырғанға дейін 8 сағат бойы ұйықтаңыз
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class='bx bx-food-menu'></i>
+                        </div>
+                        <div class="recommendation-text">
+                            Тапсырмас бұрын жеңіл тамақтанғыз
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class='bx bx-drink'></i>
+                        </div>
+                        <div class="recommendation-text">
+                            Алкогольді қабылдамаңыз (48 сағат бұрын)
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">
+                            <i class='bx bx-capsule'></i>
+                        </div>
+                        <div class="recommendation-text">
+                            Дәрі-дәрмектерді қабылдағаныңызды айтыңыз
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Eligibility Test -->
+            <section class="eligibility-card">
+                <div class="eligibility-header">
+                    <i class='bx bx-check-shield'></i>
+                    <h3>Сіз донор бола аласыз ба?</h3>
+                </div>
+                <div class="eligibility-body">
+                    <div class="test-question" id="question1">
+                        <div class="question-number">1/3</div>
+                        <p>Сіздің салмағыңыз 50 кг-нан көп пе?</p>
+                        <div class="test-answers">
+                            <button class="test-btn yes-btn" onclick="nextQuestion(1, true)">
+                                <i class='bx bx-check'></i> Иә
+                            </button>
+                            <button class="test-btn no-btn" onclick="showResult(false)">
+                                <i class='bx bx-x'></i> Жоқ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="test-question hidden" id="question2">
+                        <div class="question-number">2/3</div>
+                        <p>Соңғы 6 айда операция жасатқыз ба?</p>
+                        <div class="test-answers">
+                            <button class="test-btn yes-btn" onclick="showResult(false)">
+                                <i class='bx bx-check'></i> Иә
+                            </button>
+                            <button class="test-btn no-btn" onclick="nextQuestion(2, false)">
+                                <i class='bx bx-x'></i> Жоқ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="test-question hidden" id="question3">
+                        <div class="question-number">3/3</div>
+                        <p>Сізде созылмалы аурулар бар ма?</p>
+                        <div class="test-answers">
+                            <button class="test-btn yes-btn" onclick="showResult(false)">
+                                <i class='bx bx-check'></i> Иә
+                            </button>
+                            <button class="test-btn no-btn" onclick="showResult(true)">
+                                <i class='bx bx-x'></i> Жоқ
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="test-result hidden" id="testResult">
+                        <div class="result-icon">
+                            <i class='bx' id="resultIcon"></i>
+                        </div>
+                        <h4 id="resultTitle"></h4>
+                        <p id="resultText"></p>
+                        <button class="btn btn-primary" onclick="resetTest()">
+                            <i class='bx bx-refresh'></i> Қайта бастау
+                        </button>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
+
     <nav class="footer-nav">
         <a href="home.html" class="nav-item">
             <i class='bx bx-home'></i>
